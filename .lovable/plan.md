@@ -1,7 +1,7 @@
 # Beer Money Club — plano de implementação
 
 ## Objetivo
-Criar uma PWA mobile-first em português, centrada em oportunidades novas e urgentes. A experiência deverá transmitir rapidez, confiança e organização, sem parecer um casino, site de cupões ou produto crypto agressivo.
+Criar uma PWA mobile-first em português, centrada em responder instantaneamente ao que mudou desde a última visita e nas oportunidades novas e urgentes. A experiência deverá transmitir rapidez, confiança e organização, sem parecer um casino, site de cupões ou produto crypto agressivo.
 
 ## Experiência a construir
 1. **Onboarding em quatro momentos**
@@ -18,7 +18,8 @@ Criar uma PWA mobile-first em português, centrada em oportunidades novas e urge
    - Manifesto, ícones e metadados para instalação; sem modo offline nesta fase.
 
 3. **Aplicação principal**
-   - “Hoje” abre diretamente no valor disponível e nas oportunidades novas.
+   - “Hoje” abre num resumo temporal direto: novas desde a última visita, alterações de valor, prazos que ficaram urgentes e total disponível agora.
+   - O estado “Estás em dia” substitui a navegação infinita quando não há novidades.
    - Quatro abas inferiores: Hoje, Explorar, Alertas e Conta.
    - Explorar com pesquisa, categorias e filtros úteis.
    - Alertas como timeline cronológica.
