@@ -109,9 +109,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .category-link { height: 32px; flex: none; border-radius: 0; padding-inline: 0; color: var(--muted-foreground); font-size: 12px; }
 .category-link-active { border-bottom: 2px solid var(--primary); color: var(--foreground); }
 .search-field { display: flex; height: 52px; align-items: center; gap: 12px; border-radius: 8px; background: var(--muted); padding-inline: 16px; }
-.value-meter { position: relative; height: 68px; overflow: hidden; border: 2px solid var(--accent); border-radius: 8px; background: var(--primary); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent), 0 12px 30px color-mix(in oklab, var(--primary) 15%, transparent); }
-.value-liquid { position: absolute; inset: auto 0 0; height: 58%; background: color-mix(in oklab, var(--accent) 42%, var(--primary)); animation: liquid-rise 900ms cubic-bezier(.2,.8,.2,1) both; }
-.value-liquid::before { content: ""; position: absolute; top: -5px; left: -10%; width: 120%; height: 11px; border-radius: 50%; background: color-mix(in oklab, var(--accent) 58%, var(--primary)); animation: liquid-wave 5s ease-in-out infinite alternate; }
+.value-progress { border: 2px solid var(--accent); border-radius: 8px; background: var(--card); padding: 20px; box-shadow: 0 14px 36px color-mix(in oklab, var(--foreground) 8%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--accent) 22%, transparent); }
+.value-progress-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.value-progress-heading > div { display: flex; flex-direction: column; }
+.value-progress-heading strong { font-family: var(--font-editorial); font-size: 36px; font-weight: 800; line-height: .95; }
+.value-progress-heading span { margin-top: 7px; font-size: 13px; font-weight: 600; color: var(--muted-foreground); }
+.value-progress-heading .value-progress-percent { margin-top: 2px; font-family: var(--font-editorial); font-size: 18px; font-weight: 800; color: var(--primary); }
+.value-progress-track { position: relative; height: 18px; margin-top: 24px; overflow: hidden; border: 1px solid color-mix(in oklab, var(--accent) 72%, var(--primary)); border-radius: 999px; background: color-mix(in oklab, var(--primary) 12%, var(--card)); box-shadow: inset 0 2px 5px color-mix(in oklab, var(--primary) 12%, transparent); }
+.value-progress-fill { width: 0%; height: 100%; border-radius: inherit; background: var(--primary); box-shadow: 0 0 14px color-mix(in oklab, var(--primary) 25%, transparent); animation: progress-enter 900ms cubic-bezier(.2,.8,.2,1) both; }
+.value-progress-footer { display: flex; justify-content: space-between; margin-top: 9px; color: var(--muted-foreground); font-size: 11px; font-weight: 700; }
 .change-row { display: flex; align-items: center; gap: 14px; padding-block: 17px; border-bottom: 1px solid color-mix(in oklab, var(--border) 65%, transparent); }
 .change-row:last-child { border-bottom: 0; }
 .change-label { font-size: 10px; font-weight: 800; text-transform: uppercase; }
@@ -134,8 +140,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes count-pop { 0% { opacity: 0; transform: translateY(10px) scale(.98); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes mark-in { 0% { opacity: 0; transform: scale(.82); } 100% { opacity: 1; transform: scale(1); } }
 @keyframes splash-away { 0%, 78% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
-@keyframes liquid-rise { from { height: 0; } to { height: 58%; } }
-@keyframes liquid-wave { from { transform: translateX(-2%); } to { transform: translateX(2%); } }
+@keyframes progress-enter { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
 .motion-rise { animation: rise 420ms cubic-bezier(.2,.8,.2,1) both; }
 .motion-count { animation: count-pop 540ms cubic-bezier(.2,.8,.2,1) both; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
