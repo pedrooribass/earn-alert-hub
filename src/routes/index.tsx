@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, BellRing, ChevronRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, BellRing, ChevronRight } from "lucide-react";
 import { AppShell } from "@/components/beer-money/app-shell";
 import { OpportunityCard } from "@/components/beer-money/opportunity-card";
 import { Button } from "@/components/ui/button";
 import { opportunities, totalAvailable } from "@/lib/opportunities";
+import { BrandLogo } from "@/components/beer-money/brand-logo";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -19,23 +20,25 @@ export const Route = createFileRoute("/")({
 function TodayPage() {
   const newItems = opportunities.filter((item) => item.isNew);
   const urgent = opportunities.filter((item) => item.urgent);
+  const featured = newItems[0] ?? opportunities[0];
+  if (!featured) return null;
   return <AppShell action={<Button asChild variant="ghost" size="icon" aria-label="Abrir alertas"><Link to="/alertas"><BellRing /></Link></Button>}>
-    <section className="px-5 pb-8 pt-4">
-      <div className="motion-rise rounded-[16px] bg-primary px-5 py-6 text-primary-foreground">
-        <div className="flex items-center gap-2 text-xs font-bold opacity-80"><Sparkles className="size-4" /> DESDE ONTEM</div>
-        <h1 className="mt-4 font-editorial text-[34px] font-semibold leading-[1.02]">Há 3 coisas novas<br />para ti.</h1>
-        <div className="mt-6 grid grid-cols-3 gap-2 border-t border-primary-foreground/20 pt-4">
-          <div><strong className="block text-xl">2</strong><span className="text-[11px] opacity-75">novas</span></div>
-          <div><strong className="block text-xl">+30€</strong><span className="text-[11px] opacity-75">aumento</span></div>
-          <div><strong className="block text-xl">1</strong><span className="text-[11px] opacity-75">urgente</span></div>
-        </div>
-      </div>
+    <section className="px-5 pb-7 pt-5 motion-rise">
+      <p className="eyebrow">Aconteceu desde ontem</p>
+      <h1 className="mt-3 max-w-sm text-[36px] font-extrabold leading-[1.04]">Três oportunidades que merecem atenção.</h1>
+      <p className="mt-4 text-sm leading-6 text-muted-foreground">Uma é nova, uma melhorou e outra termina hoje.</p>
     </section>
     <section className="px-5 pb-9">
-      <p className="text-xs font-bold text-muted-foreground">DISPONÍVEIS AGORA</p>
-      <div className="mt-3 flex items-end justify-between"><p className="big-number motion-count">{totalAvailable}€</p><Link to="/explorar" className="mb-1 flex items-center text-sm font-bold text-primary">Ver tudo <ArrowUpRight className="ml-1 size-4" /></Link></div>
+      <Link to="/oportunidades/$id" params={{id:featured.id}} className="featured-opportunity">
+        <div className="flex items-start justify-between"><BrandLogo name={featured.brand} large/><span className="editorial-index">01</span></div>
+        <p className="mt-7 text-[11px] font-bold uppercase text-primary">Em destaque</p>
+        <h2 className="mt-2 text-3xl font-extrabold">{featured.brand}</h2>
+        <p className="mt-2 text-lg font-semibold">{featured.title}</p>
+        <div className="mt-8 flex items-end justify-between border-t border-primary-foreground/20 pt-5"><div><p className="text-xs opacity-70">Valor da oportunidade</p><p className="mt-1 text-3xl font-bold">Até {featured.reward}€</p></div><ArrowUpRight className="size-5"/></div>
+      </Link>
     </section>
-    <section className="pb-5"><div className="section-heading"><h2 className="text-xl font-extrabold">Novidades</h2><span className="text-xs font-bold text-muted-foreground">{newItems.length} novas</span></div><div className="horizontal-scroll">{newItems.slice(0,3).map((item) => <OpportunityCard key={item.id} item={item} compact />)}</div></section>
-    <section className="pb-6"><div className="section-heading"><h2 className="text-xl font-extrabold">A terminar</h2><Link to="/explorar" className="text-xs font-bold text-primary">Ver todas</Link></div><div className="space-y-3 px-5">{urgent.slice(0,2).map((item) => <Link key={item.id} to="/oportunidades/$id" params={{ id: item.id }} className="flex items-center gap-3 rounded-xl border bg-card p-3.5"><div className="brand-tile">{item.brand[0]}</div><div className="min-w-0 flex-1"><p className="truncate text-sm font-extrabold">{item.brand}</p><p className="mt-0.5 text-xs font-semibold text-urgent">{item.deadline}</p></div><strong className="text-lg">{item.reward}€</strong><ChevronRight className="size-4 text-muted-foreground" /></Link>)}</div></section>
+    <section className="pb-7"><div className="section-heading"><div><p className="eyebrow">Edição de hoje</p><h2 className="mt-1 text-2xl font-extrabold">Acabadas de chegar</h2></div><Link to="/explorar" className="text-xs font-bold text-primary">Ver todas</Link></div><div className="horizontal-scroll">{newItems.slice(1,4).map((item) => <OpportunityCard key={item.id} item={item} compact />)}</div></section>
+    <section className="pb-7"><div className="section-heading"><div><p className="eyebrow">Última chamada</p><h2 className="mt-1 text-2xl font-extrabold">A terminar</h2></div></div><div className="divide-y border-y px-5">{urgent.slice(0,3).map((item) => <Link key={item.id} to="/oportunidades/$id" params={{ id: item.id }} className="brand-list-row"><BrandLogo name={item.brand}/><div className="min-w-0 flex-1"><p className="truncate text-base font-extrabold">{item.brand}</p><p className="truncate text-sm text-muted-foreground">{item.title}</p><p className="mt-1 text-xs font-semibold text-urgent">{item.deadline}</p></div><div className="text-right"><strong className="block text-lg">{item.reward}€</strong><ChevronRight className="ml-auto mt-1 size-4 text-muted-foreground" /></div></Link>)}</div></section>
+    <section className="mx-5 mb-6 flex items-center justify-between border-t pt-5 text-sm"><span className="text-muted-foreground">{opportunities.length} oportunidades verificadas</span><strong>{totalAvailable}€ disponíveis</strong></section>
   </AppShell>;
 }

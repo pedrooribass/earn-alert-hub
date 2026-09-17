@@ -27,10 +27,14 @@ Conta
 ```
 
 ## Design system
-- Cores: Cream `#F8F3EA`, Warm White `#FCFBF8`, Forest `#1F4D3A`, Beer Gold `#D9A441`, Warm Grey `#ECE8E1`, Ink `#222222`.
-- Tipografia: Manrope para interface e valores; Fraunces apenas para momentos editoriais curtos.
-- Raios: 6–16 px, conforme hierarquia. Cartões nunca aninhados.
-- Espaçamento base: 4 px; grelha principal 16/24 px.
+- Direção: consumo editorial premium, inspirada em Apple Wallet, Revolut, Linear e Arc; nunca dashboard financeiro.
+- Hierarquia obrigatória: marca → oportunidade → valor → detalhes. A recompensa apoia a decisão, mas não lidera o ecrã.
+- Cores: Warm White `#FCFBF8`, Warm Grey `#EDEAE3`, Editorial Green `#173F32`, Beer Gold `#C99A3D`, Ink `#222222`.
+- Tipografia: Outfit para marca, títulos e valores; Figtree para interface, leitura e metadados.
+- Estrutura: ritmo magazine, divisórias finas, muito espaço negativo, cartões simples e navegação monocromática.
+- Marcas: logótipos grandes e nomes explícitos; monogramas neutros apenas quando não existe ativo oficial.
+- Raios: 6–10 px. Cartões nunca aninhados e sem cápsulas decorativas ou categorias coloridas.
+- Espaçamento base: 4 px; grelha principal 20/24 px.
 - Ícones: contorno de 1,75 px; sem emojis como iconografia estrutural.
 - Tom: factual, português europeu, benefício primeiro, condições explícitas.
 
