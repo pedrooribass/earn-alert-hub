@@ -27,11 +27,16 @@ Conta
 ```
 
 ## Design system
-- Direção: consumo editorial premium, inspirada em Apple Wallet, Revolut, Linear e Arc; nunca dashboard financeiro.
+- Direção: produto de consumo premium, inspirado em Apple Wallet, Whop, Airbnb, Revolut e App Store Today; nunca dashboard financeiro, bolsa de crypto ou site de cupões.
 - Hierarquia obrigatória: marca → oportunidade → valor → detalhes. A recompensa apoia a decisão, mas não lidera o ecrã.
 - Cores: Warm White `#FCFBF8`, Warm Grey `#EDEAE3`, Editorial Green `#173F32`, Beer Gold `#C99A3D`, Ink `#222222`.
 - Tipografia: Outfit para marca, títulos e valores; Figtree para interface, leitura e metadados.
-- Estrutura: ritmo magazine, divisórias finas, muito espaço negativo, cartões simples e navegação monocromática.
+- Estrutura: muito espaço negativo, títulos grandes, poucas divisórias, cartões simples e navegação monocromática. Sem tipografia editorial.
+- Tipografia: Outfit nos títulos; Figtree na interface e no corpo.
+- Hoje: medidor premium verde e dourado com o valor ativo, seguido das mudanças desde a última visita: novas, melhoradas e a terminar.
+- Explorar: Destaques, Dinheiro imediato, Bónus, Compras, Cashback, Referências, Apps, IA e A terminar. Finanças e crypto são apenas subcategorias internas.
+- Alertas: atividade pessoal primeiro; mudanças importantes depois.
+- Interação nativa: texto da interface não selecionável e `touch-callout` desativado; campos de introdução mantêm seleção normal.
 - Marcas: logótipos grandes e nomes explícitos; monogramas neutros apenas quando não existe ativo oficial.
 - Raios: 6–10 px. Cartões nunca aninhados e sem cápsulas decorativas ou categorias coloridas.
 - Espaçamento base: 4 px; grelha principal 20/24 px.
