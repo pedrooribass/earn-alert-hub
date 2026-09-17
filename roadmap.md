@@ -8,6 +8,6 @@
 - [x] Validar em mobile e desktop.
 - [x] Redesenhar toda a experiência com hierarquia centrada nas marcas.
 - [x] Validar novamente a abertura, as rotas principais e os detalhes em mobile e desktop.
-- [ ] Reposicionar a aplicação como hub premium de oportunidades para Portugal.
-- [ ] Reconstruir Hoje, Explorar, Alertas e cartões com dados realistas e marcas reconhecíveis.
+- [x] Reposicionar a aplicação como hub premium de oportunidades para Portugal.
+- [x] Reconstruir Hoje, Explorar, Alertas e cartões com dados realistas e marcas reconhecíveis.
 - [ ] Validar a nova experiência em mobile e desktop.
