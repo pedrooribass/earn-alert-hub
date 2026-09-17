@@ -4,9 +4,10 @@ import myfin from "@/assets/myfin-logo.png.asset.json";
 import bybit from "@/assets/bybit-logo.png.asset.json";
 import kraken from "@/assets/kraken-logo.png.asset.json";
 import attapoll from "@/assets/attapoll-logo.png.asset.json";
+import beruby from "@/assets/beruby-logo.png.asset.json";
 
 const marks: Record<string, { path: string; hex: string }> = { Coinbase: siCoinbase, Robinhood: siRobinhood };
-const images: Record<string, string> = { MyFin: myfin.url, Bybit: bybit.url, Kraken: kraken.url, AttaPoll: attapoll.url };
+const images: Record<string, string> = { MyFin: myfin.url, Bybit: bybit.url, Kraken: kraken.url, AttaPoll: attapoll.url, Beruby: beruby.url };
 
 export function BrandLogo({ name, large = false, className }: { name: string; large?: boolean; className?: string }) {
   const mark = marks[name];

@@ -100,6 +100,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .horizontal-scroll { display: flex; scroll-snap-type: x mandatory; gap: 12px; overflow-x: auto; padding: 2px 20px 16px; scrollbar-width: none; }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; padding: 0 20px 10px; }
+.section-heading-stacked { align-items: flex-end; gap: 12px; }
+.section-heading-stacked > div { min-width: 0; }
+.section-heading-stacked h2 { max-width: 280px; }
+.section-heading-stacked > a { flex: none; padding-bottom: 2px; }
 .big-number { font-size: clamp(64px, 24vw, 104px); font-weight: 850; line-height: .82; letter-spacing: 0; }
 .glass-sheet { background: color-mix(in oklab, var(--background) 96%, transparent); backdrop-filter: blur(20px); }
 .safe-bottom { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
