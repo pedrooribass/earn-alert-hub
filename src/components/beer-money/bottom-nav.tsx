@@ -14,7 +14,7 @@ export function BottomNav() {
     <div className="grid grid-cols-4">
       {items.map(({ to, label, icon: Icon }) => {
         const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
-        return <Link key={to} to={to} aria-current={active ? "page" : undefined} className={active ? "nav-item nav-item-active" : "nav-item"}>
+        return <Link key={to} to={to} aria-current={active ? "page" : undefined} onClick={() => navigator.vibrate?.(8)} className={active ? "nav-item nav-item-active" : "nav-item"}>
           <span className="nav-icon"><Icon strokeWidth={active ? 2.25 : 1.75} /></span>
           <span>{label}</span>
         </Link>;

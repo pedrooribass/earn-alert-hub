@@ -12,3 +12,7 @@
 - [x] Reconstruir Hoje, Explorar, Alertas e cartões com dados realistas e marcas reconhecíveis.
 - [x] Validar a nova experiência em mobile e desktop.
 - [x] Refinar tipografia, hierarquia, verde premium e navegação nativa.
+- [x] Reconstruir Hoje em torno do valor disponível e das melhores oportunidades.
+- [x] Adicionar estados persistentes e progresso pessoal às campanhas.
+- [x] Tornar Explorar e Alertas orientados a benefícios e conclusão.
+- [x] Validar a direção final em mobile e desktop.
