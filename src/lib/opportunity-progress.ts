@@ -34,7 +34,8 @@ function snapshot() {
   return cachedValue;
 }
 
-const serverSnapshot = () => ({} as Record<string, OpportunityProgress>);
+const emptyProgress: Record<string, OpportunityProgress> = {};
+const serverSnapshot = () => emptyProgress;
 
 export function useOpportunityProgress() {
   const progress = useSyncExternalStore(subscribe, snapshot, serverSnapshot);

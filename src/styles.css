@@ -113,6 +113,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .safe-bottom { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
 .featured-grid { display: grid; gap: 12px; }
 .featured-opportunity { display: block; border: 1px solid color-mix(in oklab, var(--accent) 34%, transparent); border-radius: 8px; background: var(--primary); color: var(--primary-foreground); padding: 16px; box-shadow: var(--surface-shadow-raised); transition: box-shadow 200ms ease, transform 200ms ease; }
+.featured-opportunity .partner-logo-large { width: 60px; height: 60px; }
 .featured-opportunity:active { transform: scale(.992); box-shadow: var(--surface-shadow); }
 .featured-opportunity .partner-logo { border-color: color-mix(in oklab, var(--background) 18%, transparent); background: color-mix(in oklab, var(--background) 8%, transparent); color: var(--background); box-shadow: none; }
 .featured-opportunity .partner-logo img { background: var(--card); }
