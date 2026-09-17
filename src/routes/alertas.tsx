@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, Clock3, CircleDot, Hourglass, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/beer-money/app-shell";
 
-export const Route = createFileRoute("/alertas")({ head: () => ({ meta: [{ title: "A tua atividade — Beer Money Club" },{ name: "description", content: "Acompanha oportunidades concluídas, pendentes e recompensas disponíveis." },{ property: "og:title", content: "A tua atividade — Beer Money Club" },{ property: "og:description", content: "Progresso pessoal e mudanças importantes nas tuas oportunidades." },{ property: "og:type", content: "website" },{ name: "twitter:card", content: "summary_large_image" }] }), component: AlertsPage });
+export const Route = createFileRoute("/alertas")({ head: () => ({ meta: [{ title: "A tua atividade — Beer Money App" },{ name: "description", content: "Acompanha oportunidades concluídas, pendentes e recompensas disponíveis." },{ property: "og:title", content: "A tua atividade — Beer Money App" },{ property: "og:description", content: "Progresso pessoal e mudanças importantes nas tuas oportunidades." },{ property: "og:type", content: "website" },{ name: "twitter:card", content: "summary_large_image" }] }), component: AlertsPage });
 const alerts=[
  {title:"Coinbase concluída",detail:"20€ adicionados ao teu progresso",icon:Check,id:"coinbase-recompensa",done:true},
  {title:"Falta concluir o depósito da Bybit",detail:"Deposita 100€ para continuares",icon:CircleDot,id:"bybit-recompensa"},

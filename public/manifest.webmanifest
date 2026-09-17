@@ -1,13 +1,13 @@
 {
-  "name": "Beer Money Club",
-  "short_name": "BMC",
-  "description": "As oportunidades que valem a pena, antes que desapareçam.",
+  "name": "Beer Money App",
+  "short_name": "Beer Money",
+  "description": "Cashback, bónus e recompensas.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#F8F3EA",
-  "theme_color": "#1F4D3A",
+  "background_color": "#FAFAFA",
+  "theme_color": "#FAFAFA",
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }

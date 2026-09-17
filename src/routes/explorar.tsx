@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { opportunities } from "@/lib/opportunities";
 
 const categories = ["Destaques","Dinheiro rápido","Cashback","Contas","Crypto","Questionários"];
-export const Route = createFileRoute("/explorar")({ head: () => ({ meta: [{ title: "Explorar oportunidades — Beer Money Club" },{ name: "description", content: "Pesquisa e filtra oportunidades relevantes em Portugal." },{ property: "og:title", content: "Explorar — Beer Money Club" },{ property: "og:description", content: "Oportunidades organizadas por categoria, valor e urgência." },{ property: "og:type", content: "website" },{ name: "twitter:card", content: "summary_large_image" }] }), component: ExplorePage });
+export const Route = createFileRoute("/explorar")({ head: () => ({ meta: [{ title: "Explorar oportunidades — Beer Money App" },{ name: "description", content: "Pesquisa e filtra oportunidades relevantes em Portugal." },{ property: "og:title", content: "Explorar — Beer Money App" },{ property: "og:description", content: "Oportunidades organizadas por categoria, valor e urgência." },{ property: "og:type", content: "website" },{ name: "twitter:card", content: "summary_large_image" }] }), component: ExplorePage });
 function ExplorePage() {
  const [query,setQuery]=useState(""); const [category,setCategory]=useState("Destaques");
  const filtered=useMemo(()=>opportunities.filter(i=>i.discovery.includes(category)&&(i.brand+" "+i.title+" "+i.rewardType).toLowerCase().includes(query.toLowerCase())),[query,category]);

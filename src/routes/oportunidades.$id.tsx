@@ -8,7 +8,7 @@ import { progressLabels, useOpportunityProgress, type OpportunityProgress } from
 
 export const Route = createFileRoute("/oportunidades/$id")({
   loader: ({ params }) => { const item=opportunities.find(o=>o.id===params.id); if(!item) throw notFound(); return item; },
-  head: ({ loaderData }) => ({ meta: loaderData ? [{ title: `${loaderData.brand}: ${loaderData.rewardLabel} — Beer Money Club` },{ name:"description",content:loaderData.summary},{ property:"og:title",content:`${loaderData.brand}: ${loaderData.rewardLabel}`},{ property:"og:description",content:loaderData.summary},{ property:"og:type",content:"article"},{ name:"twitter:card",content:"summary_large_image"}] : [{title:"Oportunidade indisponível — Beer Money Club"},{name:"robots",content:"noindex"}] }),
+  head: ({ loaderData }) => ({ meta: loaderData ? [{ title: `${loaderData.brand}: ${loaderData.rewardLabel} — Beer Money App` },{ name:"description",content:loaderData.summary},{ property:"og:title",content:`${loaderData.brand}: ${loaderData.rewardLabel}`},{ property:"og:description",content:loaderData.summary},{ property:"og:type",content:"article"},{ name:"twitter:card",content:"summary_large_image"}] : [{title:"Oportunidade indisponível — Beer Money App"},{name:"robots",content:"noindex"}] }),
   component: DetailPage,
 });
 function DetailPage(){
