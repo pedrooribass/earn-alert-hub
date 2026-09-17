@@ -12,6 +12,6 @@ export function BrandLogo({ name, large = false, className }: { name: string; la
   const mark = marks[name];
   const image = images[name];
   return <div className={cn("partner-logo", large && "partner-logo-large", className)} data-brand={name.toLowerCase()} aria-hidden="true">
-    {image ? <img src={image} alt="" /> : mark ? <svg viewBox="0 0 24 24" role="img" style={{ color: `#${mark.hex}` }}><path d={mark.path} fill="currentColor" /></svg> : <span className="brand-wordmark">{name}</span>}
+    {image ? <img src={image} alt="" /> : mark ? <svg viewBox="0 0 24 24" role="img"><path d={mark.path} fill="currentColor" /></svg> : <span className="brand-wordmark">{name}</span>}
   </div>;
 }
