@@ -47,20 +47,20 @@
   --card-foreground: oklch(0.245 0.01 68);
   --popover: oklch(0.997 0.003 80);
   --popover-foreground: oklch(0.245 0.01 68);
-  --primary: oklch(0.35 0.075 162);
+  --primary: oklch(0.285 0.072 158);
   --primary-foreground: oklch(0.985 0.008 82);
-  --secondary: oklch(0.925 0.009 82);
+  --secondary: oklch(0.935 0.008 82);
   --secondary-foreground: oklch(0.3 0.02 70);
-  --muted: oklch(0.94 0.009 78);
-  --muted-foreground: oklch(0.51 0.018 65);
-  --accent: oklch(0.83 0.105 83);
+  --muted: oklch(0.955 0.006 82);
+  --muted-foreground: oklch(0.49 0.012 75);
+  --accent: oklch(0.76 0.105 78);
   --accent-foreground: oklch(0.31 0.07 158);
   --destructive: oklch(0.58 0.19 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.88 0.012 75);
-  --input: oklch(0.88 0.012 75);
-  --ring: oklch(0.52 0.09 158);
-  --positive: oklch(0.43 0.11 150);
+  --border: oklch(0.9 0.009 78);
+  --input: oklch(0.9 0.009 78);
+  --ring: oklch(0.38 0.08 158);
+  --positive: oklch(0.36 0.095 151);
   --positive-soft: oklch(0.93 0.045 145);
   --urgent: oklch(0.55 0.17 38);
   --urgent-soft: oklch(0.94 0.045 52);
@@ -76,13 +76,15 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 button, a { -webkit-tap-highlight-color: transparent; }
 
 .app-frame { min-height: 100svh; width: 100%; max-width: 540px; margin-inline: auto; background: var(--background); }
-.app-header { display: flex; min-height: 76px; align-items: center; justify-content: space-between; padding: 18px 20px 12px; }
-.eyebrow { margin-bottom: 2px; font-size: 11px; font-weight: 800; line-height: 1; text-transform: uppercase; color: var(--muted-foreground); }
-.bottom-navigation { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; width: 100%; max-width: 540px; margin-inline: auto; border-top: 1px solid var(--border); background: color-mix(in oklab, var(--background) 92%, transparent); padding: 9px 16px max(10px, env(safe-area-inset-bottom)); backdrop-filter: blur(20px); }
-.nav-item { display: flex; min-width: 0; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 600; transition: color 180ms ease; }
-.nav-icon { display: grid; width: 40px; height: 28px; place-items: center; border-radius: 6px; transition: background 180ms ease, transform 180ms ease; }
-.nav-icon svg { width: 19px; height: 19px; }
-.opportunity-card { position: relative; overflow: hidden; border-radius: 8px; background: var(--card); padding: 22px; box-shadow: 0 10px 32px color-mix(in oklab, var(--foreground) 5%, transparent); }
+.app-header { display: flex; min-height: 72px; align-items: center; justify-content: space-between; padding: 16px 20px 10px; }
+.eyebrow { margin-bottom: 2px; font-size: 10px; font-weight: 750; line-height: 1; text-transform: uppercase; color: var(--muted-foreground); }
+.bottom-navigation { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; width: 100%; max-width: 540px; margin-inline: auto; border-top: 1px solid color-mix(in oklab, var(--border) 72%, transparent); background: color-mix(in oklab, var(--background) 94%, transparent); padding: 8px 14px max(9px, env(safe-area-inset-bottom)); box-shadow: 0 -8px 30px color-mix(in oklab, var(--foreground) 4%, transparent); backdrop-filter: blur(24px); }
+.nav-item { display: flex; min-width: 0; min-height: 48px; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--muted-foreground); font-size: 10px; font-weight: 550; transition: color 180ms ease; }
+.nav-item-active { color: var(--primary); font-weight: 700; }
+.nav-icon { display: grid; width: 36px; height: 25px; place-items: center; transition: transform 180ms ease; }
+.nav-item-active .nav-icon { transform: translateY(-1px); }
+.nav-icon svg { width: 20px; height: 20px; }
+.opportunity-card { position: relative; overflow: hidden; border: 1px solid color-mix(in oklab, var(--border) 70%, transparent); border-radius: 8px; background: var(--card); padding: 20px; box-shadow: 0 10px 30px color-mix(in oklab, var(--foreground) 4%, transparent); }
 .partner-logo { display: grid; width: 48px; height: 48px; flex: none; place-items: center; border-radius: 8px; background: var(--card); color: var(--primary); box-shadow: 0 4px 18px color-mix(in oklab, var(--foreground) 8%, transparent); }
 .partner-logo svg { width: 24px; height: 24px; }
 .partner-logo[data-brand="coinbase"] { color: oklch(0.55 0.24 260); }
@@ -91,16 +93,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .partner-logo-large { width: 64px; height: 64px; }
 .partner-logo-large svg { width: 32px; height: 32px; }
 .partner-logo-large .brand-wordmark { font-size: 13px; }
-.value-display { font-family: var(--font-editorial); font-size: 28px; font-weight: 700; line-height: 1; letter-spacing: 0; }
+.value-display { font-family: var(--font-editorial); font-size: 25px; font-weight: 700; line-height: 1; letter-spacing: 0; }
 .meta-pill { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: var(--muted); padding: 5px 8px; white-space: nowrap; }
 .meta-pill svg { width: 13px; height: 13px; }
 .horizontal-scroll { display: flex; scroll-snap-type: x mandatory; gap: 12px; overflow-x: auto; padding: 2px 20px 16px; scrollbar-width: none; }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
-.section-heading { display: flex; align-items: baseline; justify-content: space-between; padding: 0 20px 12px; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; padding: 0 20px 10px; }
 .big-number { font-size: clamp(64px, 24vw, 104px); font-weight: 850; line-height: .82; letter-spacing: 0; }
 .glass-sheet { background: color-mix(in oklab, var(--background) 96%, transparent); backdrop-filter: blur(20px); }
 .safe-bottom { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
-.featured-opportunity { display: block; border-radius: 8px; background: var(--foreground); color: var(--background); padding: 22px; box-shadow: 0 18px 42px color-mix(in oklab, var(--foreground) 18%, transparent); }
+.featured-opportunity { display: block; border: 1px solid color-mix(in oklab, var(--accent) 42%, transparent); border-radius: 8px; background: var(--primary); color: var(--primary-foreground); padding: 20px; box-shadow: 0 18px 42px color-mix(in oklab, var(--primary) 18%, transparent); }
 .featured-opportunity .partner-logo { border-color: color-mix(in oklab, var(--background) 18%, transparent); background: color-mix(in oklab, var(--background) 8%, transparent); color: var(--background); box-shadow: none; }
 .editorial-index { font-family: var(--font-editorial); font-size: 13px; font-weight: 600; opacity: .45; }
 .brand-list-row { display: flex; align-items: center; gap: 14px; padding-block: 18px; }
@@ -108,23 +110,27 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .category-nav::-webkit-scrollbar { display: none; }
 .category-link { height: 32px; flex: none; border-radius: 0; padding-inline: 0; color: var(--muted-foreground); font-size: 12px; }
 .category-link-active { border-bottom: 2px solid var(--primary); color: var(--foreground); }
-.search-field { display: flex; height: 52px; align-items: center; gap: 12px; border-radius: 8px; background: var(--muted); padding-inline: 16px; }
-.value-progress { border: 2px solid var(--accent); border-radius: 8px; background: var(--card); padding: 20px; box-shadow: 0 14px 36px color-mix(in oklab, var(--foreground) 8%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--accent) 22%, transparent); }
+.search-field { display: flex; height: 48px; align-items: center; gap: 12px; border: 1px solid color-mix(in oklab, var(--border) 72%, transparent); border-radius: 8px; background: var(--muted); padding-inline: 15px; }
+.value-progress { position: relative; overflow: hidden; border: 1px solid var(--accent); border-radius: 8px; background: var(--primary); color: var(--primary-foreground); padding: 20px; box-shadow: 0 18px 38px color-mix(in oklab, var(--primary) 19%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--accent) 18%, transparent); }
+.value-progress::after { position: absolute; inset: 0; background: linear-gradient(110deg, transparent 20%, color-mix(in oklab, var(--primary-foreground) 5%, transparent) 46%, transparent 72%); content: ""; transform: translateX(-100%); animation: progress-sheen 5.5s ease-in-out infinite; pointer-events: none; }
 .value-progress-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .value-progress-heading > div { display: flex; flex-direction: column; }
-.value-progress-heading strong { font-family: var(--font-editorial); font-size: 36px; font-weight: 800; line-height: .95; }
-.value-progress-heading span { margin-top: 7px; font-size: 13px; font-weight: 600; color: var(--muted-foreground); }
-.value-progress-heading .value-progress-percent { margin-top: 2px; font-family: var(--font-editorial); font-size: 18px; font-weight: 800; color: var(--primary); }
-.value-progress-track { position: relative; height: 18px; margin-top: 24px; overflow: hidden; border: 1px solid color-mix(in oklab, var(--accent) 72%, var(--primary)); border-radius: 999px; background: color-mix(in oklab, var(--primary) 12%, var(--card)); box-shadow: inset 0 2px 5px color-mix(in oklab, var(--primary) 12%, transparent); }
-.value-progress-fill { width: 0%; height: 100%; border-radius: inherit; background: var(--primary); box-shadow: 0 0 14px color-mix(in oklab, var(--primary) 25%, transparent); animation: progress-enter 900ms cubic-bezier(.2,.8,.2,1) both; }
-.value-progress-footer { display: flex; justify-content: space-between; margin-top: 9px; color: var(--muted-foreground); font-size: 11px; font-weight: 700; }
-.change-row { display: flex; align-items: center; gap: 14px; padding-block: 17px; border-bottom: 1px solid color-mix(in oklab, var(--border) 65%, transparent); }
+.value-progress-heading strong { font-family: var(--font-editorial); font-size: 32px; font-weight: 750; line-height: 1; }
+.value-progress-heading span { margin-top: 6px; font-size: 12px; font-weight: 500; color: color-mix(in oklab, var(--primary-foreground) 66%, transparent); }
+.value-progress-heading .value-progress-percent { margin-top: 2px; font-family: var(--font-editorial); font-size: 16px; font-weight: 700; color: var(--accent); }
+.value-progress-track { position: relative; z-index: 1; height: 9px; margin-top: 23px; overflow: hidden; border: 1px solid color-mix(in oklab, var(--accent) 70%, transparent); border-radius: 999px; background: color-mix(in oklab, var(--primary-foreground) 9%, transparent); box-shadow: inset 0 2px 4px color-mix(in oklab, var(--foreground) 20%, transparent); }
+.value-progress-fill { width: 0%; height: 100%; border-radius: inherit; background: var(--primary-foreground); box-shadow: 0 0 12px color-mix(in oklab, var(--primary-foreground) 20%, transparent); animation: progress-enter 900ms cubic-bezier(.2,.8,.2,1) both; }
+.value-progress-footer { position: relative; z-index: 1; display: flex; justify-content: space-between; margin-top: 9px; color: color-mix(in oklab, var(--primary-foreground) 66%, transparent); font-size: 10px; font-weight: 600; }
+.change-row { display: flex; align-items: center; gap: 13px; padding-block: 14px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); }
 .change-row:last-child { border-bottom: 0; }
 .change-label { font-size: 10px; font-weight: 800; text-transform: uppercase; }
-.activity-row { display: flex; align-items: center; gap: 13px; padding-block: 16px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); }
+.activity-row { display: flex; align-items: center; gap: 13px; padding-block: 14px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); }
+.activity-row-active { color: var(--foreground); }
+.activity-row-historical { color: var(--muted-foreground); opacity: .78; }
+.activity-row-historical .activity-icon { background: var(--muted); color: var(--muted-foreground); }
 .activity-icon { display: grid; width: 36px; height: 36px; flex: none; place-items: center; border-radius: 50%; background: var(--muted); color: var(--primary); }
 .activity-icon svg { width: 16px; height: 16px; }
-.alert-row { display: flex; gap: 14px; padding-block: 18px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); }
+.alert-row { display: flex; gap: 14px; padding-block: 15px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); opacity: .86; }
 .detail-row { display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 10px; padding-block: 15px; font-size: 13px; }
 .detail-row svg { width: 16px; height: 16px; color: var(--primary); }
 .detail-row span { color: var(--muted-foreground); }
@@ -141,6 +147,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes mark-in { 0% { opacity: 0; transform: scale(.82); } 100% { opacity: 1; transform: scale(1); } }
 @keyframes splash-away { 0%, 78% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
 @keyframes progress-enter { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+@keyframes progress-sheen { 0%, 68% { transform: translateX(-100%); } 88%, 100% { transform: translateX(100%); } }
 .motion-rise { animation: rise 420ms cubic-bezier(.2,.8,.2,1) both; }
 .motion-count { animation: count-pop 540ms cubic-bezier(.2,.8,.2,1) both; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
