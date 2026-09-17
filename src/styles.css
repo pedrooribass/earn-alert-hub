@@ -79,8 +79,11 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 button, a { -webkit-tap-highlight-color: transparent; }
 
 .app-frame { min-height: 100svh; width: 100%; max-width: 540px; margin-inline: auto; background: var(--background); }
-.app-header { display: flex; min-height: 76px; align-items: center; justify-content: space-between; padding: 14px 20px 10px; }
-.brand-app-icon { width:40px; height:40px; flex:none; border:none; border-radius:10px; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.app-header { display: flex; min-height: 72px; align-items: center; justify-content: space-between; padding: 12px 20px 8px; }
+.brand-app-icon { width: 36px; height: 36px; flex: none; border: 1px solid var(--surface-border); border-radius: 10px; object-fit: cover; box-shadow: var(--surface-shadow); }
+.brand-name { font-family: var(--font-editorial); font-size: 16px; line-height: 1; color: var(--foreground); }
+.brand-name strong { font-weight: 750; }
+.brand-name em { color: var(--primary); font-style: normal; font-weight: 750; }
 .eyebrow { margin-bottom: 2px; font-size: 10px; font-weight: 750; line-height: 1; text-transform: uppercase; color: var(--muted-foreground); }
 .bottom-navigation { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; width: 100%; max-width: 540px; margin-inline: auto; border-top: 1px solid color-mix(in oklab, var(--border) 76%, transparent); background: color-mix(in oklab, var(--card) 94%, transparent); padding: 7px 20px max(12px, env(safe-area-inset-bottom)); box-shadow: 0 -1px 0 color-mix(in oklab, var(--card) 75%, transparent), 0 -10px 28px color-mix(in oklab, var(--foreground) 3%, transparent); backdrop-filter: blur(28px) saturate(1.35); }
 .nav-item { display: flex; min-width: 0; min-height: 50px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: color-mix(in oklab, var(--muted-foreground) 86%, transparent); font-size: 10px; font-weight: 550; transition: color 180ms ease, transform 180ms ease; }
@@ -88,7 +91,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .nav-icon { display: grid; width: 38px; height: 24px; place-items: center; transition: transform 180ms ease; }
 .nav-item-active .nav-icon { color: var(--primary); transform: translateY(-1px); }
 .nav-icon svg { width: 21px; height: 21px; }
-.opportunity-card { position: relative; overflow: hidden; border: 1px solid var(--surface-border); border-radius: 12px; background: var(--card); padding: 16px; box-shadow: var(--surface-shadow); transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
+.opportunity-card { position: relative; overflow: hidden; border: 1px solid var(--surface-border); border-radius: 14px; background: var(--card); padding: 18px; box-shadow: var(--surface-shadow); transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
 .opportunity-card:active { transform: scale(.995); box-shadow: 0 4px 14px color-mix(in oklab, var(--foreground) 5%, transparent); }
 .partner-logo { display: grid; width: 54px; height: 54px; flex: none; place-items: center; overflow: hidden; border: 1px solid var(--surface-border); border-radius: 12px; background: var(--card); color: var(--primary); box-shadow: 0 1px 2px color-mix(in oklab, var(--foreground) 4%, transparent), 0 5px 14px color-mix(in oklab, var(--foreground) 4%, transparent); }
 .partner-logo svg { width: 24px; height: 24px; }
@@ -99,7 +102,19 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .partner-logo-large { width: 60px; height: 60px; }
 .partner-logo-large svg { width: 32px; height: 32px; }
 .partner-logo-large .brand-wordmark { font-size: 13px; }
-.value-display { font-family: var(--font-editorial); font-size: 31px; font-weight: 760; line-height: 1; letter-spacing: 0; }
+.value-display { font-family: var(--font-editorial); font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: 0; }
+.reward-overline { margin-bottom: 5px; color: var(--muted-foreground); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.offer-brand-row { display: flex; align-items: center; gap: 11px; margin-top: 16px; padding-top: 14px; border-top: 1px solid color-mix(in oklab, var(--border) 72%, transparent); }
+.offer-brand-row .partner-logo { width: 44px; height: 44px; border-radius: 10px; box-shadow: none; }
+.offer-brand-row .status-chip { margin-left: auto; }
+.trust-label { display: inline-flex; align-items: center; gap: 4px; margin-top: 3px; color: var(--muted-foreground); font-size: 10px; font-weight: 650; white-space: nowrap; }
+.trust-label svg { width: 12px; height: 12px; color: var(--primary); }
+.status-chip { flex: none; border-radius: 999px; background: var(--positive-soft); padding: 5px 7px; color: var(--primary); font-size: 9px; font-weight: 750; }
+.status-chip-complete { background: var(--muted); color: var(--muted-foreground); }
+.offer-meta { display: flex; align-items: center; gap: 8px; margin-top: 12px; color: var(--muted-foreground); font-size: 10px; font-weight: 600; }
+.offer-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.offer-meta span + span::before { content: "·"; margin-right: 4px; }
+.offer-meta svg { width: 13px; height: 13px; }
 .meta-pill { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: var(--muted); padding: 5px 8px; white-space: nowrap; }
 .meta-pill svg { width: 13px; height: 13px; }
 .horizontal-scroll { display: flex; scroll-snap-type: x mandatory; gap: 12px; overflow-x: auto; padding: 2px 20px 16px; scrollbar-width: none; }
@@ -113,15 +128,19 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .glass-sheet { background: color-mix(in oklab, var(--background) 96%, transparent); backdrop-filter: blur(20px); }
 .safe-bottom { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
 .featured-grid { display: grid; gap: 14px; }
-.featured-opportunity { display: block; border: 1px solid var(--surface-border); border-radius: 12px; background: var(--card); color: var(--foreground); padding: 16px; box-shadow: var(--surface-shadow); transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
+.featured-opportunity { display: block; border: 1px solid var(--surface-border); border-radius: 14px; background: var(--card); color: var(--foreground); padding: 17px; box-shadow: var(--surface-shadow); transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
 .featured-opportunity .partner-logo-large { width: 56px; height: 56px; }
 .featured-opportunity:active { transform: scale(.992); box-shadow: var(--surface-shadow); }
 .featured-opportunity .partner-logo { border-color: var(--surface-border); background: var(--card); box-shadow: 0 2px 8px color-mix(in oklab, var(--foreground) 5%, transparent); }
 .featured-kicker { max-width: 116px; text-align: right; font-size: 9px; font-weight: 750; line-height: 1.3; text-transform: uppercase; color: var(--muted-foreground); }
+.featured-reward { margin-top: 5px; color: var(--primary); font-family: var(--font-editorial); font-size: 34px; font-weight: 800; line-height: 1; }
 .featured-action { display: inline-flex; align-items: center; gap: 5px; color: var(--primary); font-size: 12px; font-weight: 700; }
 .featured-action svg { width: 14px; height: 14px; }
 .opportunity-list { overflow: hidden; border: 1px solid var(--surface-border); border-radius: 12px; background: var(--card); padding-inline: 16px; box-shadow: var(--surface-shadow); }
-.opportunity-list-row { display: flex; align-items: center; gap: 12px; min-height: 80px; padding-block: 14px; border-bottom: 1px solid color-mix(in oklab, var(--border) 72%, transparent); }
+.opportunity-list-row { display: grid; grid-template-columns: minmax(72px, auto) 1fr 16px; align-items: center; gap: 12px; min-height: 82px; padding-block: 14px; border-bottom: 1px solid color-mix(in oklab, var(--border) 72%, transparent); }
+.opportunity-list-row .partner-logo { width: 38px; height: 38px; border-radius: 9px; box-shadow: none; }
+.reward-column strong { display: block; color: var(--primary); font-family: var(--font-editorial); font-size: 19px; font-weight: 800; line-height: 1; }
+.reward-column span { display: block; margin-top: 4px; color: var(--muted-foreground); font-size: 9px; font-weight: 600; }
 .opportunity-list-row:last-child { border-bottom: 0; }
 .editorial-index { font-family: var(--font-editorial); font-size: 13px; font-weight: 600; opacity: .45; }
 .brand-list-row { display: flex; align-items: center; gap: 14px; padding-block: 18px; }
@@ -130,19 +149,22 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .category-link { height: 32px; flex: none; border-radius: 0; padding-inline: 0; color: var(--muted-foreground); font-size: 12px; }
 .category-link-active { border-bottom: 2px solid var(--primary); color: var(--foreground); }
 .search-field { display: flex; height: 48px; align-items: center; gap: 12px; border: 1px solid var(--surface-border); border-radius: 12px; background: var(--card); padding-inline: 15px; box-shadow: var(--surface-shadow); }
-.value-progress { position: relative; overflow: hidden; border: 1px solid color-mix(in oklab, var(--primary) 12%, var(--border)); border-radius: 12px; background: color-mix(in oklab, var(--positive-soft) 58%, var(--card)); color: var(--foreground); padding: 15px 18px 14px; box-shadow: var(--surface-shadow); }
+.value-progress { position: relative; overflow: hidden; border: 1px solid var(--surface-border); border-radius: 14px; background: var(--card); color: var(--foreground); padding: 15px 18px 14px; box-shadow: var(--surface-shadow); }
 .value-progress::after { display: none; }
 .value-progress-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .value-progress-heading > div { display: flex; flex-direction: column; }
-.value-progress-heading strong { font-family: var(--font-editorial); font-size: 40px; font-weight: 760; line-height: .95; color: var(--foreground); }
-.value-progress-heading span { margin-top: 6px; font-size: 12px; font-weight: 500; color: var(--muted-foreground); }
-.value-progress-heading .value-progress-percent { margin-top: 2px; font-family: var(--font-editorial); font-size: 16px; font-weight: 700; color: var(--primary); }
-.value-progress-count { position: relative; z-index: 1; margin-top: 8px; font-size: 12px; font-weight: 650; color: var(--primary); }
+.value-progress-heading strong { order: 2; margin-top: 4px; font-family: var(--font-editorial); font-size: 42px; font-weight: 800; line-height: .95; color: var(--primary); }
+.value-progress-heading span { order: 1; margin-top: 0; font-size: 11px; font-weight: 650; color: var(--muted-foreground); }
+.value-progress-heading .value-progress-percent { margin-top: 2px; border-radius: 999px; background: var(--positive-soft); padding: 5px 8px; font-family: var(--font-sans); font-size: 10px; font-weight: 700; color: var(--primary); }
+.value-progress-count { position: relative; z-index: 1; margin-top: 8px; font-size: 11px; font-weight: 650; color: var(--foreground); }
 .value-progress-track { position: relative; z-index: 1; height: 7px; margin-top: 14px; overflow: hidden; border-radius: 999px; background: color-mix(in oklab, var(--primary) 10%, var(--card)); box-shadow: inset 0 1px 2px color-mix(in oklab, var(--foreground) 7%, transparent); }
 .value-progress-fill { height: 100%; min-width: 2px; border-radius: inherit; background: var(--primary); box-shadow: none; animation: progress-enter 900ms cubic-bezier(.2,.8,.2,1) both; }
 .value-progress-footer { position: relative; z-index: 1; display: flex; justify-content: space-between; margin-top: 8px; color: var(--muted-foreground); font-size: 10px; font-weight: 600; }
-.social-proof { display: flex; min-height: 36px; align-items: center; gap: 8px; margin-top: 12px; border: 1px solid var(--surface-border); border-radius: 10px; background: var(--card); padding: 7px 11px; box-shadow: 0 1px 3px color-mix(in oklab, var(--foreground) 2.5%, transparent); font-size: 12px; font-weight: 550; color: var(--muted-foreground); }
+.social-proof { display: flex; min-height: 40px; align-items: center; gap: 9px; margin-top: 10px; border: 1px solid var(--surface-border); border-radius: 10px; background: var(--card); padding: 7px 11px; box-shadow: 0 1px 3px color-mix(in oklab, var(--foreground) 2.5%, transparent); color: var(--muted-foreground); }
 .social-proof svg { width: 15px; height: 15px; color: var(--accent-foreground); }
+.social-proof span { display: flex; min-width: 0; flex-direction: column; }
+.social-proof strong { color: var(--foreground); font-size: 11px; font-weight: 650; }
+.social-proof small { margin-top: 1px; font-size: 9px; }
 .change-row { display: flex; align-items: center; gap: 13px; padding-block: 14px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); }
 .change-row:last-child { border-bottom: 0; }
 .change-label { font-size: 10px; font-weight: 800; text-transform: uppercase; }
@@ -160,6 +182,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .progress-selector { display: grid; grid-template-columns: 1fr; gap: 6px; border: 1px solid var(--surface-border); border-radius: 12px; padding: 6px; background: var(--card); box-shadow: var(--surface-shadow); }
 .progress-selector button { justify-content: flex-start; box-shadow: none; }
 .bottom-action { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; width: 100%; max-width: 540px; margin-inline: auto; border-top: 1px solid var(--surface-border); background: color-mix(in oklab, var(--card) 92%, transparent); padding: 12px 16px max(14px, env(safe-area-inset-bottom)); box-shadow: 0 -8px 24px color-mix(in oklab, var(--foreground) 5%, transparent); backdrop-filter: blur(20px); }
+.detail-reward { border-bottom: 1px solid var(--surface-border); padding-bottom: 16px; }
+.detail-reward p { color: var(--muted-foreground); font-size: 11px; font-weight: 650; }
+.detail-reward strong { display: block; margin-top: 4px; color: var(--primary); font-family: var(--font-editorial); font-size: 42px; font-weight: 800; line-height: 1; }
+.detail-reward span { display: block; margin-top: 6px; color: var(--muted-foreground); font-size: 11px; }
+.detail-brand { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.detail-brand h1 { margin-top: 3px; font-family: var(--font-editorial); font-size: 21px; font-weight: 750; line-height: 1.1; }
 .splash-screen { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--background); color: var(--foreground); animation: splash-away 1.9s ease both; }
 .splash-mark { display: grid; width: 112px; height: 112px; place-items: center; animation: mark-in 800ms cubic-bezier(.2,.8,.2,1) both; }
 .splash-mark img { width: 100%; height: 100%; object-fit: contain; }
@@ -180,21 +208,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (min-width: 760px) { body { background: var(--secondary); } .app-frame { box-shadow: 0 0 0 1px var(--border), 0 24px 70px color-mix(in oklab, var(--foreground) 10%, transparent); } }
 
 
-.app-header{padding:18px 24px 12px;}
-.opportunity-card{
-background:#fff;
-border:1px solid var(--surface-border);
-border-radius:20px;
-padding:20px;
-box-shadow:0 8px 24px rgba(0,0,0,.05);
-transition:all .2s ease;
-}
-.opportunity-card:hover{transform:translateY(-1px);}
-.value-display{
-font-size:34px;
-font-weight:800;
-letter-spacing:-0.03em;
-}
 button[class*="w-full"]{
 border-radius:14px;
 font-weight:700;
