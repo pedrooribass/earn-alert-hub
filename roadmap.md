@@ -11,3 +11,4 @@
 - [x] Reposicionar a aplicação como hub premium de oportunidades para Portugal.
 - [x] Reconstruir Hoje, Explorar, Alertas e cartões com dados realistas e marcas reconhecíveis.
 - [x] Validar a nova experiência em mobile e desktop.
+- [ ] Refinar tipografia, hierarquia, verde premium e navegação nativa.
