@@ -125,6 +125,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .change-row:last-child { border-bottom: 0; }
 .change-label { font-size: 10px; font-weight: 800; text-transform: uppercase; }
 .activity-row { display: flex; align-items: center; gap: 13px; padding-block: 14px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); }
+.activity-row-active { color: var(--foreground); }
+.activity-row-historical { color: var(--muted-foreground); opacity: .78; }
+.activity-row-historical .activity-icon { background: var(--muted); color: var(--muted-foreground); }
 .activity-icon { display: grid; width: 36px; height: 36px; flex: none; place-items: center; border-radius: 50%; background: var(--muted); color: var(--primary); }
 .activity-icon svg { width: 16px; height: 16px; }
 .alert-row { display: flex; gap: 14px; padding-block: 15px; border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent); opacity: .86; }
