@@ -16,10 +16,11 @@ export function SplashScreen() {
 
   if (!visible) return null;
   return (
-    <div className="splash-screen" aria-label="Beer Money Club">
+    <div className="splash-screen" aria-label="Beer Money App">
       <div className="splash-mark"><img src={mark.url} alt="" /></div>
-      <p className="splash-name">Beer Money Club</p>
-      <p className="splash-slogan">Nunca mais percas uma oportunidade.</p>
+      <p className="splash-name">Beer Money App</p>
+      <p className="splash-slogan">Cashback, bónus e recompensas.</p>
+      <p className="splash-description">As melhores oportunidades para ganhar dinheiro extra num só lugar.</p>
     </div>
   );
 }

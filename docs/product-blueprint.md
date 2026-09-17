@@ -1,4 +1,4 @@
-# Beer Money Club — Product Blueprint
+# Beer Money App — Product Blueprint
 
 ## Princípio central
 O utilizador abre a aplicação para perceber imediatamente quanto dinheiro ainda tem disponível para ganhar e quais são as melhores oportunidades para o obter. O progresso pessoal substitui notícias, atualizações de mercado e linguagem de trading.
@@ -29,7 +29,7 @@ Conta
 ## Design system
 - Direção: produto de consumo premium, inspirado em Apple Wallet, Whop, Airbnb, Revolut e App Store Today; nunca dashboard financeiro, bolsa de crypto ou site de cupões.
 - Hierarquia obrigatória: marca → oportunidade → valor → detalhes. A recompensa apoia a decisão, mas não lidera o ecrã.
-- Cores: Warm White `#FCFBF8`, Warm Grey `#EDEAE3`, verde Beer Money Club profundo, Beer Gold contido e Ink `#222222`. O verde escuro transmite confiança e produto premium, sem parecer uma plataforma de trading.
+- Cores: fundo `#FAFAFA`, superfícies brancas, verde Beer Money App `#0B6B43`, verde suave `#EAF7EF`, cinza `#6B7280` e dourado contido `#D4A84F` apenas em destaques premium.
 - Tipografia: Outfit para marca, títulos e valores; Figtree para interface, leitura e metadados.
 - Estrutura: espaço negativo controlado, títulos compactos, informação densa mas respirável, poucas divisórias e cartões simples. Sem tipografia editorial.
 - Tipografia: Outfit nos títulos; Figtree na interface e no corpo.

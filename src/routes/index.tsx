@@ -8,9 +8,9 @@ import { useOpportunityProgress } from "@/lib/opportunity-progress";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
-    { title: "Hoje — Beer Money Club" },
+    { title: "Hoje — Beer Money App" },
     { name: "description", content: "Vê imediatamente as novas oportunidades, aumentos e prazos desde a tua última visita." },
-    { property: "og:title", content: "Hoje — Beer Money Club" },
+    { property: "og:title", content: "Hoje — Beer Money App" },
     { property: "og:description", content: "Nunca mais percas uma oportunidade relevante." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
