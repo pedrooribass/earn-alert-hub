@@ -6,5 +6,5 @@
 - [x] Preparar autenticação, persistência e estrutura de dados com Lovable Cloud.
 - [x] Documentar wireframes, fluxos, sistema visual, movimento, MVP, V2 e retenção.
 - [x] Validar em mobile e desktop.
-- [ ] Redesenhar toda a experiência com hierarquia centrada nas marcas.
-- [ ] Validar novamente a abertura, as rotas principais e os detalhes em mobile e desktop.
+- [x] Redesenhar toda a experiência com hierarquia centrada nas marcas.
+- [x] Validar novamente a abertura, as rotas principais e os detalhes em mobile e desktop.

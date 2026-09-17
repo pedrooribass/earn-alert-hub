@@ -20,6 +20,8 @@ export const Route = createFileRoute("/")({
 function TodayPage() {
   const newItems = opportunities.filter((item) => item.isNew);
   const urgent = opportunities.filter((item) => item.urgent);
+  const featured = newItems[0] ?? opportunities[0];
+  if (!featured) return null;
   return <AppShell action={<Button asChild variant="ghost" size="icon" aria-label="Abrir alertas"><Link to="/alertas"><BellRing /></Link></Button>}>
     <section className="px-5 pb-7 pt-5 motion-rise">
       <p className="eyebrow">Aconteceu desde ontem</p>
@@ -27,12 +29,12 @@ function TodayPage() {
       <p className="mt-4 text-sm leading-6 text-muted-foreground">Uma é nova, uma melhorou e outra termina hoje.</p>
     </section>
     <section className="px-5 pb-9">
-      <Link to="/oportunidades/$id" params={{id:newItems[0]?.id ?? opportunities[0].id}} className="featured-opportunity">
-        <div className="flex items-start justify-between"><BrandLogo name={newItems[0]?.brand ?? opportunities[0].brand} large/><span className="editorial-index">01</span></div>
+      <Link to="/oportunidades/$id" params={{id:featured.id}} className="featured-opportunity">
+        <div className="flex items-start justify-between"><BrandLogo name={featured.brand} large/><span className="editorial-index">01</span></div>
         <p className="mt-7 text-[11px] font-bold uppercase text-primary">Em destaque</p>
-        <h2 className="mt-2 text-3xl font-extrabold">{newItems[0]?.brand}</h2>
-        <p className="mt-2 text-lg font-semibold">{newItems[0]?.title}</p>
-        <div className="mt-8 flex items-end justify-between border-t border-primary-foreground/20 pt-5"><div><p className="text-xs opacity-70">Valor da oportunidade</p><p className="mt-1 text-3xl font-bold">Até {newItems[0]?.reward}€</p></div><ArrowUpRight className="size-5"/></div>
+        <h2 className="mt-2 text-3xl font-extrabold">{featured.brand}</h2>
+        <p className="mt-2 text-lg font-semibold">{featured.title}</p>
+        <div className="mt-8 flex items-end justify-between border-t border-primary-foreground/20 pt-5"><div><p className="text-xs opacity-70">Valor da oportunidade</p><p className="mt-1 text-3xl font-bold">Até {featured.reward}€</p></div><ArrowUpRight className="size-5"/></div>
       </Link>
     </section>
     <section className="pb-7"><div className="section-heading"><div><p className="eyebrow">Edição de hoje</p><h2 className="mt-1 text-2xl font-extrabold">Acabadas de chegar</h2></div><Link to="/explorar" className="text-xs font-bold text-primary">Ver todas</Link></div><div className="horizontal-scroll">{newItems.slice(1,4).map((item) => <OpportunityCard key={item.id} item={item} compact />)}</div></section>
