@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BellRing, Clock3, Sparkles } from "lucide-react";
+import { ArrowRight, BellRing, CheckCircle2, Clock3, ShieldCheck } from "lucide-react";
 import { AppShell } from "@/components/beer-money/app-shell";
 import { Button } from "@/components/ui/button";
 import { opportunities, totalAvailable } from "@/lib/opportunities";
@@ -31,17 +31,17 @@ function TodayPage() {
     <section className="px-5 pb-7 pt-1 motion-rise">
       <div className="value-progress" role="progressbar" aria-label={`${claimed} euros reclamados de ${totalAvailable} euros`} aria-valuemin={0} aria-valuemax={totalAvailable} aria-valuenow={claimed}>
         <div className="value-progress-heading">
-          <div><strong>{available}€</strong><span>disponíveis para ganhar</span></div>
-          <span className="value-progress-percent">{percent}%</span>
+          <div><span>Disponível para ganhar</span><strong>{available}€</strong></div>
+          <span className="value-progress-percent">{percent}% concluído</span>
         </div>
-        <p className="value-progress-count">{remaining} oportunidades ainda por concluir</p>
+        <p className="value-progress-count">Próxima meta · concluir 1 de {remaining} oportunidades</p>
         <div className="value-progress-track"><div className="value-progress-fill" style={{ width: `${percent}%` }} /></div>
         <div className="value-progress-footer"><span>{claimed}€ reclamados</span><span>{available}€ disponíveis</span></div>
       </div>
       <h1 className="sr-only">Dinheiro disponível para ganhar</h1>
-      <p className="social-proof"><Sparkles/>Hoje já ajudámos 84 membros a ganhar 1.920€</p>
+      <p className="social-proof"><ShieldCheck/><span><strong>1.920€ em recompensas pagas hoje</strong><small>84 membros ativos</small></span></p>
     </section>
-    <section className="pb-7"><div className="section-heading section-heading-stacked"><div><p className="eyebrow">Ordenadas para ti</p><h2 className="mt-1.5 text-xl font-bold leading-tight">As tuas melhores oportunidades</h2></div><Link to="/explorar" className="text-xs font-semibold text-primary">Ver todas</Link></div><div className="featured-grid px-5">{featured.map((item,index)=><Link key={item.id} to="/oportunidades/$id" params={{id:item.id}} className="featured-opportunity"><div className="flex items-center justify-between"><BrandLogo name={item.brand} large/><span className="featured-kicker">{index===0?"Melhor oportunidade":"Melhor retorno"}</span></div><h3 className="mt-3 text-[15px] font-semibold">{item.brand}</h3><p className="mt-1 value-display text-primary">{item.rewardLabel}</p><p className="mt-1 text-[11px] text-muted-foreground">{item.rewardType}</p><div className="mt-3 flex items-center justify-between"><span className="flex items-center gap-1.5 text-xs text-muted-foreground"><Clock3 className="size-3.5"/>{item.time}</span><span className="featured-action">Começar <ArrowRight/></span></div></Link>)}</div></section>
-    <section className="px-5 pb-8"><div className="opportunity-list">{rest.map((item)=><Link key={item.id} to="/oportunidades/$id" params={{id:item.id}} className="opportunity-list-row"><BrandLogo name={item.brand}/><div className="min-w-0 flex-1"><h3 className="truncate text-sm font-semibold">{item.brand}</h3><p className="mt-0.5 truncate text-[11px] text-muted-foreground">{item.rewardType} · {item.time}</p></div><strong className="text-base text-primary">{item.rewardLabel}</strong><ArrowRight className="size-4 text-muted-foreground"/></Link>)}</div></section>
+    <section className="pb-7"><div className="section-heading section-heading-stacked"><div><p className="eyebrow">O teu próximo ganho</p><h2 className="mt-1.5 text-xl font-bold leading-tight">Melhores oportunidades</h2></div><Link to="/explorar" className="text-xs font-semibold text-primary">Ver todas</Link></div><div className="featured-grid px-5">{featured.map((item,index)=><Link key={item.id} to="/oportunidades/$id" params={{id:item.id}} className="featured-opportunity"><div className="flex items-start justify-between gap-3"><div><p className="featured-kicker text-left">{index===0?"Melhor oportunidade":"Melhor retorno"}</p><p className="featured-reward">{item.rewardLabel}</p></div><BrandLogo name={item.brand} large/></div><div className="mt-3 flex items-center gap-2"><h3 className="text-[15px] font-semibold">{item.brand}</h3><span className="trust-label"><CheckCircle2/> Verificada</span></div><p className="mt-1 line-clamp-1 text-xs text-muted-foreground">{item.title}</p><div className="mt-3 flex items-center justify-between"><span className="flex items-center gap-1.5 text-xs text-muted-foreground"><Clock3 className="size-3.5"/>{item.time}</span><span className="featured-action">Começar <ArrowRight/></span></div></Link>)}</div></section>
+    <section className="px-5 pb-8"><div className="opportunity-list">{rest.map((item)=><Link key={item.id} to="/oportunidades/$id" params={{id:item.id}} className="opportunity-list-row"><div className="reward-column"><strong>{item.rewardLabel}</strong><span>Podes ganhar</span></div><div className="min-w-0 flex flex-1 items-center gap-2.5"><BrandLogo name={item.brand}/><div className="min-w-0"><h3 className="truncate text-sm font-semibold">{item.brand}</h3><p className="mt-0.5 truncate text-[11px] text-muted-foreground">{item.title} · {item.time}</p></div></div><ArrowRight className="size-4 text-muted-foreground"/></Link>)}</div></section>
   </AppShell>;
 }
