@@ -7,7 +7,7 @@ const alerts=[
  {title:"Coinbase: prazo documentado",detail:"Pagamento indicado em 3 dias",icon:Clock3,id:"coinbase-recompensa"},
   {title:"Bybit: capital exigido",detail:"Depósito indicado de 100€",icon:CircleDot,id:"bybit-recompensa"},
   {title:"Robinhood: bloqueio de 180 dias",detail:"Consulta a data de desbloqueio na plataforma",icon:Clock3,id:"robinhood-bonus"},
-  {title:"Kraken em análise",detail:"Prazo de pagamento: [PREENCHER]",icon:Hourglass,id:"kraken-recompensa"},
+  {title:"Kraken em análise",detail:"Prazo de pagamento: [PREENCHER: prazo em dias]",icon:Hourglass,id:"kraken-recompensa"},
   {title:"AttaPoll disponível",detail:"Valor por questionário: [PREENCHER]",icon:Sparkles,id:"atapoll-inqueritos"},
 ];
  function AlertsPage(){return <AppShell title="Alertas" eyebrow="Estado das ofertas"><div className="px-5 pt-4"><section><h2 className="text-xl font-bold">Condições registadas</h2><p className="mt-1 text-sm text-muted-foreground">Informação a confirmar antes de abrir uma conta.</p><div className="mt-5">{alerts.map(({title,detail,icon:Icon,id})=><Link key={title} to="/oportunidades/$id" params={{id}} className="activity-row activity-row-active"><span className="activity-icon"><Icon/></span><div className="min-w-0 flex-1"><h3 className="text-[14px] font-bold">{title}</h3><p className="mt-1 text-xs text-muted-foreground">{detail}</p></div><span className="text-xs font-semibold text-primary">Consultar condições</span></Link>)}</div></section></div></AppShell>}
