@@ -7,7 +7,7 @@ export function AppShell({ children, title, eyebrow, action }: { children: React
   return <div className="app-frame">
     <SplashScreen />
     <header className="app-header">
-      {title ? <div><p className="eyebrow">{eyebrow}</p><h1 className="text-xl font-bold">{title}</h1></div> : <Brand compact />}
+      {title ? <div>{eyebrow && <p className="page-context">{eyebrow}</p>}<h1 className="text-xl font-bold">{title}</h1></div> : <Brand compact />}
       {action}
     </header>
     <main className="pb-28">{children}</main>

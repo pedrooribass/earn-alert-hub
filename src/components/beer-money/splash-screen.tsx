@@ -19,8 +19,8 @@ export function SplashScreen() {
     <div className="splash-screen" aria-label="Beer Money App">
       <div className="splash-mark"><img src={mark.url} alt="" /></div>
       <p className="splash-name">Beer Money App</p>
-      <p className="splash-slogan">Cashback, bónus e recompensas.</p>
-      <p className="splash-description">As melhores oportunidades para ganhar dinheiro extra num só lugar.</p>
+      <p className="splash-slogan">Bónus de registo, verificados.</p>
+      <p className="splash-description">Comparamos recompensa, capital exigido e prazo de pagamento.</p>
     </div>
   );
 }
