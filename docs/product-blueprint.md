@@ -1,7 +1,7 @@
 # Beer Money App — Product Blueprint
 
 ## Princípio central
-O utilizador abre a aplicação para perceber imediatamente quanto dinheiro ainda tem disponível para ganhar e quais são as melhores oportunidades para o obter. O progresso pessoal substitui notícias, atualizações de mercado e linguagem de trading.
+A Beer Money App verifica bónus de registo para que o utilizador não tenha de o fazer. A interface funciona como um registo factual: recompensa, capital exigido e prazo de pagamento aparecem sempre em conjunto.
 
 ## Wireframes e fluxo
 ```text
@@ -28,23 +28,25 @@ Conta
 
 ## Design system
 - Direção: produto de consumo premium, inspirado em Apple Wallet, Whop, Airbnb, Revolut e App Store Today; nunca dashboard financeiro, bolsa de crypto ou site de cupões.
-- Hierarquia obrigatória: marca → oportunidade → valor → detalhes. A recompensa apoia a decisão, mas não lidera o ecrã.
-- Cores: fundo `#FAFAFA`, superfícies brancas, verde Beer Money App `#0B6B43`, verde suave `#EAF7EF`, cinza `#6B7280` e dourado contido `#D4A84F` apenas em destaques premium.
+- Hierarquia obrigatória por luminância, funcional em escala de cinzentos. Valores monetários usam tinta escura e nunca cor semântica.
+- Cores: fundo `#FAFAFA`, superfícies brancas, azul `#2B44E0` apenas para ação/foco/separador ativo, verde `#0C6B48` apenas para verificado e concluído, âmbar `#9A4E00` apenas para capital exigido, bloqueios e esperas.
 - Tipografia: Outfit para marca, títulos e valores; Figtree para interface, leitura e metadados.
 - Estrutura: espaço negativo controlado, títulos compactos, informação densa mas respirável, poucas divisórias e cartões simples. Sem tipografia editorial.
 - Tipografia: Outfit nos títulos; Figtree na interface e no corpo.
-- Hoje: medidor premium verde e dourado com valor reclamado, valor disponível, percentagem e campanhas por concluir; segue-se prova social e oportunidades ordenadas por relevância.
+- Hoje: medidor contido com valor reclamado, valor disponível, percentagem e ofertas por concluir; sem prova social, contadores ou valores inventados.
 - Explorar: Destaques, Dinheiro rápido, Cashback, Contas, Crypto e Questionários. A linguagem apresenta benefícios comerciais, nunca produtos financeiros.
 - Alertas: apenas próximos passos pessoais, validações, levantamentos e novas recompensas relevantes.
 - Progresso: cada campanha tem três estados — não iniciada, em progresso e concluída — que atualizam o valor reclamado e disponível.
 - Peso informativo: oportunidades em curso e recompensas disponíveis têm maior peso; itens concluídos e históricos tornam-se mais leves e neutros.
-- Navegação: superfície verde quase preta; estado ativo com ícone verde e texto claro, estados inativos em cinzento neutro, sem cápsulas ou realces dourados.
+- Navegação: superfície branca; estado ativo azul e estados inativos em cinzento neutro.
 - Interação nativa: texto da interface não selecionável e `touch-callout` desativado; campos de introdução mantêm seleção normal.
 - Marcas: usar sempre o ativo oficial colorido mais reconhecível quando a marca o disponibiliza; nunca gerar ou redesenhar logótipos.
 - Raios: 6–10 px. Cartões nunca aninhados e sem cápsulas decorativas ou categorias coloridas.
 - Espaçamento base: 4 px; grelha principal 20/24 px.
 - Ícones: contorno de 1,75 px; sem emojis como iconografia estrutural.
-- Tom: factual, português europeu, benefício primeiro, condições explícitas.
+- Tom: factual e notarial, em português europeu. Sem promessas de enriquecimento, urgência artificial ou linguagem de venda. Dados desconhecidos usam literalmente `[PREENCHER]`.
+- CTA: nomeia sempre a consequência concreta, sem setas anexas ao texto.
+- Estados: “Não iniciada” não aparece como etiqueta persistente; só progresso real é assinalado.
 
 ## Motion guidelines
 - Entrada de novidade: 320 ms, deslocamento vertical de 12 px e fade.
