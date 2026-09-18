@@ -123,7 +123,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .offer-terms > div { min-width: 0; padding: 10px 8px 10px 0; }
 .offer-terms > div + div { border-left: 1px solid var(--border); padding-left: 8px; }
 .offer-terms dt { color: var(--muted-foreground); font-size: 9px; font-weight: 600; line-height: 1.2; }
-.offer-terms dd { margin-top: 4px; color: var(--foreground); font-size: 11px; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+.offer-terms dd { margin-top: 4px; color: var(--foreground); font-size: 11px; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
 .offer-terms > div:first-child dd { color: var(--caution); }
 .meta-pill { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: var(--muted); padding: 5px 8px; white-space: nowrap; }
 .meta-pill svg { width: 13px; height: 13px; }
@@ -193,6 +193,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .step-number { display: grid; width: 28px; height: 28px; flex: none; place-items: center; border: 1px solid var(--border); border-radius: 6px; color: var(--foreground); font-size: 12px; font-weight: 800; }
 .progress-selector { display: grid; grid-template-columns: 1fr; gap: 6px; border: 1px solid var(--surface-border); border-radius: 12px; padding: 6px; background: var(--card); box-shadow: var(--surface-shadow); }
 .progress-selector button { justify-content: flex-start; box-shadow: none; }
+.progress-selector .completed-control { background: var(--positive); color: var(--card); }
 .bottom-action { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; width: 100%; max-width: 540px; margin-inline: auto; border-top: 1px solid var(--surface-border); background: color-mix(in oklab, var(--card) 94%, transparent); padding: 12px 16px max(14px, env(safe-area-inset-bottom)); box-shadow: none; backdrop-filter: blur(20px); }
 .detail-reward { border-bottom: 1px solid var(--surface-border); padding-bottom: 16px; }
 .detail-reward p { color: var(--muted-foreground); font-size: 11px; font-weight: 650; }

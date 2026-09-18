@@ -1,7 +1,7 @@
 {
   "name": "Beer Money App",
   "short_name": "Beer Money",
-  "description": "Cashback, bónus e recompensas.",
+  "description": "Bónus de registo verificados, com condições explícitas.",
   "id": "/",
   "start_url": "/",
   "scope": "/",

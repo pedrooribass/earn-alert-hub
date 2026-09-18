@@ -19,7 +19,7 @@ export function OpportunityCard({ item, compact = false }: { item: Opportunity; 
     </div>
     <div className="offer-brand-row"><BrandLogo name={item.brand} /><div className="min-w-0"><h3 className="truncate text-[15px] font-semibold">{item.brand}</h3><p className="trust-label"><CheckCircle2/> Oferta verificada</p></div>{personalStatus !== "not-started" && <span className={`status-chip ${personalStatus === "completed" ? "status-chip-complete" : ""}`}>{progressLabels[personalStatus]}</span>}</div>
     <p className="mt-3 text-sm font-semibold leading-snug">{item.title}</p>
-    <p className="mt-1 line-clamp-2 text-xs leading-[18px] text-muted-foreground">{item.summary}</p>{item.insight && <p className="mt-1.5 text-xs font-semibold text-primary">{item.insight}</p>}
+    <p className="mt-1 line-clamp-2 text-xs leading-[18px] text-muted-foreground">{item.summary}</p>{item.insight && <p className="mt-1.5 text-xs font-semibold text-foreground">{item.insight}</p>}
     <dl className="offer-terms"><div><dt>Capital exigido</dt><dd>{item.capitalRequired}</dd></div><div><dt>Pagamento</dt><dd>{item.payoutTime}</dd></div><div><dt>Tempo necessário</dt><dd>{item.time}</dd></div></dl>
     <Button asChild variant={personalStatus === "completed" ? "secondary" : "default"} className="mt-4 h-12 w-full"><Link to="/oportunidades/$id" params={{ id: item.id }}>{personalStatus === "completed" ? `Rever condições da ${item.brand}` : item.actionLabel}</Link></Button>
   </article>;
