@@ -16,5 +16,5 @@
 - [x] Adicionar estados persistentes e progresso pessoal às campanhas.
 - [x] Tornar Explorar e Alertas orientados a benefícios e conclusão.
 - [x] Validar a direção final em mobile e desktop.
-- [ ] Aplicar o sistema editorial factual e a transparência estrutural em todas as ofertas.
-- [ ] Validar cor, copy, estados e condições em todas as páginas.
+- [x] Aplicar o sistema editorial factual e a transparência estrutural em todas as ofertas.
+- [x] Validar cor, copy, estados e condições em todas as páginas.
