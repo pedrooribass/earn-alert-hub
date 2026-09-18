@@ -21,4 +21,4 @@
 - [x] Migrar ofertas para dados verificáveis e bloquear ações com capital desconhecido.
 - [x] Tornar verificação, comissões, risco e financiamento da aplicação transparentes.
 - [x] Criar Informação legal e a vista interna de verificações pendentes.
-- [ ] Validar todas as páginas e interações de confiança em mobile e desktop.
+- [x] Validar todas as páginas e interações de confiança em mobile e desktop.
