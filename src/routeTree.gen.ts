@@ -11,11 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlertasRouteImport } from './routes/alertas'
+import { Route as ComoGanhamosDinheiroRouteImport } from './routes/como-ganhamos-dinheiro'
 import { Route as ContaRouteImport } from './routes/conta'
 import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as InformacaoLegalRouteImport } from './routes/informacao-legal'
 import { Route as InstalarRouteImport } from './routes/instalar'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as AdminVerificacoesRouteImport } from './routes/admin.verificacoes'
 import { Route as OportunidadesIdRouteImport } from './routes/oportunidades.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -28,6 +31,11 @@ const AlertasRoute = AlertasRouteImport.update({
   path: '/alertas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComoGanhamosDinheiroRoute = ComoGanhamosDinheiroRouteImport.update({
+  id: '/como-ganhamos-dinheiro',
+  path: '/como-ganhamos-dinheiro',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContaRoute = ContaRouteImport.update({
   id: '/conta',
   path: '/conta',
@@ -36,6 +44,11 @@ const ContaRoute = ContaRouteImport.update({
 const ExplorarRoute = ExplorarRouteImport.update({
   id: '/explorar',
   path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformacaoLegalRoute = InformacaoLegalRouteImport.update({
+  id: '/informacao-legal',
+  path: '/informacao-legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InstalarRoute = InstalarRouteImport.update({
@@ -53,6 +66,11 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminVerificacoesRoute = AdminVerificacoesRouteImport.update({
+  id: '/admin/verificacoes',
+  path: '/admin/verificacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OportunidadesIdRoute = OportunidadesIdRouteImport.update({
   id: '/oportunidades/$id',
   path: '/oportunidades/$id',
@@ -62,32 +80,41 @@ const OportunidadesIdRoute = OportunidadesIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alertas': typeof AlertasRoute
+  '/como-ganhamos-dinheiro': typeof ComoGanhamosDinheiroRoute
   '/conta': typeof ContaRoute
   '/explorar': typeof ExplorarRoute
+  '/informacao-legal': typeof InformacaoLegalRoute
   '/instalar': typeof InstalarRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/admin/verificacoes': typeof AdminVerificacoesRoute
   '/oportunidades/$id': typeof OportunidadesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alertas': typeof AlertasRoute
+  '/como-ganhamos-dinheiro': typeof ComoGanhamosDinheiroRoute
   '/conta': typeof ContaRoute
   '/explorar': typeof ExplorarRoute
+  '/informacao-legal': typeof InformacaoLegalRoute
   '/instalar': typeof InstalarRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/admin/verificacoes': typeof AdminVerificacoesRoute
   '/oportunidades/$id': typeof OportunidadesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alertas': typeof AlertasRoute
+  '/como-ganhamos-dinheiro': typeof ComoGanhamosDinheiroRoute
   '/conta': typeof ContaRoute
   '/explorar': typeof ExplorarRoute
+  '/informacao-legal': typeof InformacaoLegalRoute
   '/instalar': typeof InstalarRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/admin/verificacoes': typeof AdminVerificacoesRoute
   '/oportunidades/$id': typeof OportunidadesIdRoute
 }
 export interface FileRouteTypes {
@@ -95,42 +122,54 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/alertas'
+    | '/como-ganhamos-dinheiro'
     | '/conta'
     | '/explorar'
+    | '/informacao-legal'
     | '/instalar'
     | '/login'
     | '/onboarding'
+    | '/admin/verificacoes'
     | '/oportunidades/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/alertas'
+    | '/como-ganhamos-dinheiro'
     | '/conta'
     | '/explorar'
+    | '/informacao-legal'
     | '/instalar'
     | '/login'
     | '/onboarding'
+    | '/admin/verificacoes'
     | '/oportunidades/$id'
   id:
     | '__root__'
     | '/'
     | '/alertas'
+    | '/como-ganhamos-dinheiro'
     | '/conta'
     | '/explorar'
+    | '/informacao-legal'
     | '/instalar'
     | '/login'
     | '/onboarding'
+    | '/admin/verificacoes'
     | '/oportunidades/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlertasRoute: typeof AlertasRoute
+  ComoGanhamosDinheiroRoute: typeof ComoGanhamosDinheiroRoute
   ContaRoute: typeof ContaRoute
   ExplorarRoute: typeof ExplorarRoute
+  InformacaoLegalRoute: typeof InformacaoLegalRoute
   InstalarRoute: typeof InstalarRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
+  AdminVerificacoesRoute: typeof AdminVerificacoesRoute
   OportunidadesIdRoute: typeof OportunidadesIdRoute
 }
 
@@ -150,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlertasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/como-ganhamos-dinheiro': {
+      id: '/como-ganhamos-dinheiro'
+      path: '/como-ganhamos-dinheiro'
+      fullPath: '/como-ganhamos-dinheiro'
+      preLoaderRoute: typeof ComoGanhamosDinheiroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/conta': {
       id: '/conta'
       path: '/conta'
@@ -162,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/explorar'
       fullPath: '/explorar'
       preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/informacao-legal': {
+      id: '/informacao-legal'
+      path: '/informacao-legal'
+      fullPath: '/informacao-legal'
+      preLoaderRoute: typeof InformacaoLegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/instalar': {
@@ -185,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/verificacoes': {
+      id: '/admin/verificacoes'
+      path: '/admin/verificacoes'
+      fullPath: '/admin/verificacoes'
+      preLoaderRoute: typeof AdminVerificacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/oportunidades/$id': {
       id: '/oportunidades/$id'
       path: '/oportunidades/$id'
@@ -198,11 +258,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlertasRoute: AlertasRoute,
+  ComoGanhamosDinheiroRoute: ComoGanhamosDinheiroRoute,
   ContaRoute: ContaRoute,
   ExplorarRoute: ExplorarRoute,
+  InformacaoLegalRoute: InformacaoLegalRoute,
   InstalarRoute: InstalarRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
+  AdminVerificacoesRoute: AdminVerificacoesRoute,
   OportunidadesIdRoute: OportunidadesIdRoute,
 }
 export const routeTree = rootRouteImport
