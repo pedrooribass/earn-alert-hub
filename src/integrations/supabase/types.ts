@@ -20,6 +20,7 @@ export type Database = {
           brand_logo: string | null
           capital_required: Json
           category: Database["public"]["Enums"]["opportunity_category"]
+          category_key: string
           created_at: string
           difficulty: string
           effort: string
@@ -30,6 +31,7 @@ export type Database = {
           id: string
           is_featured: boolean
           is_new: boolean
+          offer_status: string
           payout: Json
           previous_reward: number | null
           reward: Json
@@ -51,6 +53,7 @@ export type Database = {
           brand_logo?: string | null
           capital_required?: Json
           category: Database["public"]["Enums"]["opportunity_category"]
+          category_key?: string
           created_at?: string
           difficulty: string
           effort?: string
@@ -61,6 +64,7 @@ export type Database = {
           id?: string
           is_featured?: boolean
           is_new?: boolean
+          offer_status?: string
           payout?: Json
           previous_reward?: number | null
           reward?: Json
@@ -82,6 +86,7 @@ export type Database = {
           brand_logo?: string | null
           capital_required?: Json
           category?: Database["public"]["Enums"]["opportunity_category"]
+          category_key?: string
           created_at?: string
           difficulty?: string
           effort?: string
@@ -92,6 +97,7 @@ export type Database = {
           id?: string
           is_featured?: boolean
           is_new?: boolean
+          offer_status?: string
           payout?: Json
           previous_reward?: number | null
           reward?: Json
