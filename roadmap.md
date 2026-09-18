@@ -18,3 +18,7 @@
 - [x] Validar a direção final em mobile e desktop.
 - [x] Aplicar o sistema editorial factual e a transparência estrutural em todas as ofertas.
 - [x] Validar cor, copy, estados e condições em todas as páginas.
+- [x] Migrar ofertas para dados verificáveis e bloquear ações com capital desconhecido.
+- [x] Tornar verificação, comissões, risco e financiamento da aplicação transparentes.
+- [x] Criar Informação legal e a vista interna de verificações pendentes.
+- [x] Validar todas as páginas e interações de confiança em mobile e desktop.

@@ -1,38 +1,145 @@
-export type Opportunity = {
+export type CapitalRequired =
+  | { kind: "none" }
+  | { kind: "unknown" }
+  | { kind: "amount"; amount: number; refundable: boolean | null };
+
+export type Offer = {
   id: string;
   brand: string;
-  title: string;
-  summary: string;
-  category: string;
-  reward: number;
-  guaranteedReward: number;
-  rewardLabel: string;
-  previousReward?: number;
-  rewardType: string;
-  time: string;
-  difficulty: "Muito fácil" | "Fácil" | "Média";
-  deadline: string;
-  urgent?: boolean;
-  isNew?: boolean;
-  discovery: string[];
-  status: string;
-  change: "new" | "improved" | "ending" | "ongoing";
-  steps: string[];
-  url: string;
-  insight?: string;
-  capitalRequired: string;
-  payoutTime: string;
-  actionLabel: string;
+  brandLogo: string;
+  category: "deposito" | "cashback" | "conta" | "crypto" | "questionario";
+  reward: { min: number; max?: number };
+  capitalRequired: CapitalRequired;
+  payout: { estimateDays: number; conditions: string };
+  effort: "facil" | "medio" | "dificil";
+  timeToComplete: number;
+  steps: { title: string; detail: string }[];
+  eligibility: string[];
+  risks: string[];
+  verification: { verifiedAt: string; method: string } | null;
+  hasCommission: boolean;
+  status: "nova" | "guardada" | "a_decorrer" | "em_validacao" | "paga" | "expirada";
 };
 
-export const opportunities: Opportunity[] = [
-  { id: "myfin-recompensa", brand: "MyFin", title: "Criar conta, depositar e fazer uma compra de 10€", summary: "Cria uma conta, adiciona o cartão virtual e faz uma compra elegível.", category: "Contas", reward: 20, guaranteedReward: 20, rewardLabel: "20€", rewardType: "Bónus de registo", time: "10 min", difficulty: "Fácil", deadline: "[PREENCHER]", capitalRequired: "10€", payoutTime: "[PREENCHER]", actionLabel: "Abrir conta na MyFin", discovery: ["Destaques", "Dinheiro rápido", "Contas"], status: "Disponível", change: "improved", steps: ["Criar conta", "Depositar 10€", "Criar cartão virtual gratuito", "Gastar 10€", "Receber a recompensa elegível"], url: "https://myfin.bg/" },
-  { id: "coinbase-recompensa", brand: "Coinbase", title: "Verificar identidade e depositar 10€ em Bitcoin", summary: "O bónus é atribuído depois da verificação e do primeiro depósito elegível.", category: "Crypto", reward: 20, guaranteedReward: 20, rewardLabel: "20€", rewardType: "Bónus de registo", time: "5 min", difficulty: "Fácil", deadline: "[PREENCHER]", capitalRequired: "10€", payoutTime: "3 dias", actionLabel: "Abrir conta na Coinbase", discovery: ["Destaques", "Dinheiro rápido", "Crypto"], status: "Disponível", change: "improved", steps: ["Criar conta", "Verificar identidade", "Depositar 10€ em Bitcoin", "Aguardar cerca de 3 dias", "Receber a recompensa elegível"], url: "https://www.coinbase.com/" },
-  { id: "robinhood-bonus", brand: "Robinhood", title: "Depositar 50€ e manter a recompensa bloqueada", summary: "A recompensa em crypto fica bloqueada durante 180 dias.", category: "Crypto", reward: 50, guaranteedReward: 50, rewardLabel: "50€", rewardType: "Bónus de registo", time: "8 min", difficulty: "Fácil", deadline: "[PREENCHER]", capitalRequired: "50€", payoutTime: "180 dias", actionLabel: "Abrir conta na Robinhood", discovery: ["Destaques", "Crypto"], status: "Disponível", change: "new", steps: ["Criar conta", "Depositar 50€", "Receber 50€ em crypto", "Manter a recompensa bloqueada durante 180 dias"], url: "https://robinhood.com/" },
-  { id: "bybit-recompensa", brand: "Bybit", title: "Depositar 100€ para receber 25€ e um valor adicional possível", summary: "A campanha indica 25€ garantidos e até 30€ adicionais.", category: "Crypto", reward: 55, guaranteedReward: 25, rewardLabel: "25€–55€", rewardType: "Bónus de depósito", time: "10 min", difficulty: "Média", deadline: "[PREENCHER]", capitalRequired: "100€", payoutTime: "[PREENCHER]", actionLabel: "Abrir conta na Bybit", discovery: ["Destaques", "Crypto"], status: "Disponível", change: "improved", steps: ["Criar conta", "Depositar 100€", "Receber 25€ garantidos em [PREENCHER] dias", "Cumprir as condições para até 30€ adicionais", "Consultar as condições do cartão cashback"], url: "https://www.bybit.com/" },
-  { id: "kraken-recompensa", brand: "Kraken", title: "Depositar 260€ para receber um valor aleatório", summary: "A recompensa indicada pela campanha varia entre 5€ e 200€.", category: "Crypto", reward: 200, guaranteedReward: 5, rewardLabel: "5€–200€", rewardType: "Bónus variável", time: "10 min", difficulty: "Média", deadline: "[PREENCHER]", capitalRequired: "260€", payoutTime: "[PREENCHER]", actionLabel: "Abrir conta na Kraken", discovery: ["Destaques", "Crypto"], status: "Disponível", change: "ongoing", steps: ["Criar conta", "Depositar 260€", "Cumprir as condições da campanha", "Receber entre 5€ e 200€ em [PREENCHER] dias"], url: "https://www.kraken.com/" },
-  { id: "atapoll-inqueritos", brand: "AttaPoll", title: "Responder a questionários aprovados", summary: "O valor depende dos questionários disponíveis e aceites pela plataforma.", category: "Questionários", reward: 0, guaranteedReward: 0, rewardLabel: "[PREENCHER]", rewardType: "Pagamento por questionário", time: "7 min", difficulty: "Muito fácil", deadline: "[PREENCHER]", capitalRequired: "0€", payoutTime: "[PREENCHER]", actionLabel: "Instalar a AttaPoll", discovery: ["Destaques", "Dinheiro rápido", "Questionários"], status: "Disponível", change: "ongoing", insight: "Valor por questionário: [PREENCHER]", steps: ["Instalar a aplicação", "Completar o perfil", "Escolher um questionário disponível", "Receber por cada conclusão aprovada em [PREENCHER] dias"], url: "https://attapoll.app/" },
-  { id: "cashback-lojas", brand: "Beruby", title: "Comprar através de uma loja aderente", summary: "O cashback depende da loja e das condições apresentadas antes da compra.", category: "Cashback", reward: 0, guaranteedReward: 0, rewardLabel: "[PREENCHER]", rewardType: "Cashback", time: "2 min", difficulty: "Muito fácil", deadline: "[PREENCHER]", capitalRequired: "[PREENCHER]", payoutTime: "[PREENCHER]", actionLabel: "Consultar lojas na Beruby", discovery: ["Cashback"], status: "Disponível", change: "ongoing", steps: ["Escolher uma loja elegível", "Abrir a loja através da campanha", "Concluir a compra na mesma sessão", "Receber o cashback em [PREENCHER] dias"], url: "https://pt.beruby.com/" }
+export type OfferPresentation = {
+  title: string;
+  summary: string;
+  actionLabel: string;
+  url: string;
+  discovery: string[];
+};
+
+export const offers: Offer[] = [
+  {
+    id: "myfin-recompensa", brand: "MyFin", brandLogo: "myfin", category: "conta",
+    reward: { min: 20 }, capitalRequired: { kind: "unknown" },
+    payout: { estimateDays: 0, conditions: "[PREENCHER: condições e prazo em dias]" }, effort: "facil", timeToComplete: 10,
+    steps: [
+      { title: "Criar conta", detail: "Concluir o registo na MyFin." },
+      { title: "Adicionar fundos", detail: "[PREENCHER: capital exigido]" },
+      { title: "Criar cartão", detail: "Criar o cartão virtual gratuito." },
+      { title: "Fazer uma compra", detail: "Confirmar o valor elegível antes de pagar." },
+    ],
+    eligibility: ["[PREENCHER]"], risks: ["Capital exigido e prazo ainda por confirmar."], verification: null, hasCommission: false, status: "nova",
+  },
+  {
+    id: "coinbase-recompensa", brand: "Coinbase", brandLogo: "coinbase", category: "crypto",
+    reward: { min: 20 }, capitalRequired: { kind: "unknown" },
+    payout: { estimateDays: 3, conditions: "Pago até 3 dias após a validação." }, effort: "facil", timeToComplete: 5,
+    steps: [
+      { title: "Criar conta", detail: "Concluir o registo na Coinbase." },
+      { title: "Verificar identidade", detail: "Completar a verificação pedida pela plataforma." },
+      { title: "Fazer a operação elegível", detail: "[PREENCHER: capital e operação exigidos]" },
+      { title: "Aguardar o pagamento", detail: "Pago até 3 dias após a validação." },
+    ],
+    eligibility: ["Novo cliente", "[PREENCHER: restantes condições]"], risks: ["[PREENCHER: aviso de risco]"], verification: null, hasCommission: false, status: "nova",
+  },
+  {
+    id: "robinhood-bonus", brand: "Robinhood", brandLogo: "robinhood", category: "crypto",
+    reward: { min: 50 }, capitalRequired: { kind: "amount", amount: 50, refundable: true },
+    payout: { estimateDays: 180, conditions: "A recompensa fica bloqueada 180 dias." }, effort: "facil", timeToComplete: 8,
+    steps: [
+      { title: "Criar conta", detail: "Concluir o registo na Robinhood." },
+      { title: "Depositar 50€", detail: "O capital depositado é devolvido." },
+      { title: "Receber a recompensa", detail: "A recompensa fica bloqueada 180 dias." },
+    ],
+    eligibility: ["[PREENCHER]"], risks: ["A recompensa fica bloqueada 180 dias.", "[PREENCHER: aviso de risco]"], verification: null, hasCommission: false, status: "nova",
+  },
+  {
+    id: "bybit-recompensa", brand: "Bybit", brandLogo: "bybit", category: "deposito",
+    reward: { min: 25, max: 55 }, capitalRequired: { kind: "amount", amount: 100, refundable: null },
+    payout: { estimateDays: 0, conditions: "[PREENCHER: condições e prazo em dias]" }, effort: "medio", timeToComplete: 10,
+    steps: [
+      { title: "Criar conta", detail: "Concluir o registo na Bybit." },
+      { title: "Depositar 100€", detail: "Reembolso do capital: [PREENCHER]." },
+      { title: "Cumprir as condições", detail: "25€ mínimos e até 30€ adicionais, sujeitos às condições da campanha." },
+    ],
+    eligibility: ["[PREENCHER]"], risks: ["Reembolso do capital por confirmar.", "[PREENCHER: aviso de risco]"], verification: null, hasCommission: false, status: "nova",
+  },
+  {
+    id: "kraken-recompensa", brand: "Kraken", brandLogo: "kraken", category: "crypto",
+    reward: { min: 5, max: 200 }, capitalRequired: { kind: "unknown" },
+    payout: { estimateDays: 0, conditions: "[PREENCHER: condições e prazo em dias]" }, effort: "medio", timeToComplete: 10,
+    steps: [
+      { title: "Criar conta", detail: "Concluir o registo na Kraken." },
+      { title: "Cumprir a condição de capital", detail: "[PREENCHER: capital exigido]" },
+      { title: "Receber a recompensa", detail: "Valor variável entre 5€ e 200€." },
+    ],
+    eligibility: ["[PREENCHER]"], risks: ["A recompensa é variável.", "[PREENCHER: aviso de risco]"], verification: null, hasCommission: false, status: "nova",
+  },
+  {
+    id: "atapoll-inqueritos", brand: "AttaPoll", brandLogo: "attapoll", category: "questionario",
+    reward: { min: 0 }, capitalRequired: { kind: "none" },
+    payout: { estimateDays: 0, conditions: "[PREENCHER: prazo em dias]" }, effort: "facil", timeToComplete: 7,
+    steps: [
+      { title: "Instalar a aplicação", detail: "Instalar a AttaPoll." },
+      { title: "Completar o perfil", detail: "Responder às perguntas de perfil." },
+      { title: "Responder a um questionário", detail: "Escolher um questionário disponível." },
+    ],
+    eligibility: ["[PREENCHER]"], risks: ["A disponibilidade e o valor variam por questionário."], verification: null, hasCommission: false, status: "nova",
+  },
+  {
+    id: "cashback-lojas", brand: "Beruby", brandLogo: "beruby", category: "cashback",
+    reward: { min: 0 }, capitalRequired: { kind: "unknown" },
+    payout: { estimateDays: 0, conditions: "[PREENCHER: prazo em dias]" }, effort: "facil", timeToComplete: 2,
+    steps: [
+      { title: "Escolher uma loja", detail: "Confirmar que a loja participa na campanha." },
+      { title: "Abrir a loja", detail: "Usar a ligação apresentada pela Beruby." },
+      { title: "Concluir a compra", detail: "Finalizar a compra na mesma sessão." },
+    ],
+    eligibility: ["[PREENCHER]"], risks: ["O cashback depende da loja e das condições da compra."], verification: null, hasCommission: false, status: "nova",
+  },
 ];
 
-export const totalAvailable = opportunities.reduce((sum, item) => sum + item.guaranteedReward, 0);
+export const offerPresentation: Record<string, OfferPresentation> = {
+  "myfin-recompensa": { title: "Criar conta e fazer uma compra elegível", summary: "Registo, cartão virtual e compra sujeitos às condições da campanha.", actionLabel: "Abrir conta na MyFin", url: "https://myfin.bg/", discovery: ["Destaques", "Dinheiro rápido", "Contas"] },
+  "coinbase-recompensa": { title: "Verificar identidade e concluir a operação elegível", summary: "O pagamento está indicado até 3 dias após a validação.", actionLabel: "Abrir conta na Coinbase", url: "https://www.coinbase.com/", discovery: ["Destaques", "Dinheiro rápido", "Crypto"] },
+  "robinhood-bonus": { title: "Depositar 50€ e manter a recompensa bloqueada", summary: "A recompensa em cripto fica bloqueada 180 dias.", actionLabel: "Abrir conta na Robinhood", url: "https://robinhood.com/", discovery: ["Destaques", "Crypto"] },
+  "bybit-recompensa": { title: "Depositar 100€ para receber 25€ a 55€", summary: "A campanha indica 25€ mínimos e até 30€ adicionais.", actionLabel: "Abrir conta na Bybit", url: "https://www.bybit.com/", discovery: ["Destaques", "Crypto"] },
+  "kraken-recompensa": { title: "Cumprir as condições para receber um valor variável", summary: "A recompensa indicada varia entre 5€ e 200€.", actionLabel: "Abrir conta na Kraken", url: "https://www.kraken.com/", discovery: ["Destaques", "Crypto"] },
+  "atapoll-inqueritos": { title: "Responder a questionários aprovados", summary: "O valor depende dos questionários disponíveis e aceites.", actionLabel: "Instalar a AttaPoll", url: "https://attapoll.app/", discovery: ["Destaques", "Dinheiro rápido", "Questionários"] },
+  "cashback-lojas": { title: "Comprar através de uma loja aderente", summary: "O cashback depende da loja e das condições apresentadas antes da compra.", actionLabel: "Consultar lojas na Beruby", url: "https://pt.beruby.com/", discovery: ["Cashback"] },
+};
+
+export function rewardLabel(offer: Offer) {
+  if (offer.reward.min === 0 && offer.reward.max === undefined) return "[PREENCHER]";
+  return offer.reward.max === undefined ? `${offer.reward.min}€` : `${offer.reward.min}€–${offer.reward.max}€`;
+}
+
+export function capitalLabel(capital: CapitalRequired) {
+  if (capital.kind === "none") return "Nada";
+  if (capital.kind === "unknown") return "Por confirmar";
+  if (capital.refundable === true) return `${capital.amount}€ · devolvidos`;
+  if (capital.refundable === null) return `${capital.amount}€ · reembolso por confirmar`;
+  return `${capital.amount}€`;
+}
+
+export function payoutLabel(offer: Offer) {
+  return offer.payout.estimateDays > 0 ? `${offer.payout.estimateDays} dias` : "[PREENCHER: prazo em dias]";
+}
+
+export const totalAvailable = offers.reduce((sum, offer) => sum + offer.reward.min, 0);
+
+// Compatibility alias while the UI naming is migrated from “opportunity” to “offer”.
+export type Opportunity = Offer;
+export const opportunities = offers;
