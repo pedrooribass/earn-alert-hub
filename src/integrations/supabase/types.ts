@@ -17,66 +17,96 @@ export type Database = {
       opportunities: {
         Row: {
           brand: string
+          brand_logo: string | null
+          capital_required: Json
           category: Database["public"]["Enums"]["opportunity_category"]
           created_at: string
           difficulty: string
+          effort: string
+          eligibility: Json
           expires_at: string | null
           external_url: string | null
+          has_commission: boolean
           id: string
           is_featured: boolean
           is_new: boolean
+          payout: Json
           previous_reward: number | null
+          reward: Json
           reward_max: number
           reward_min: number
+          risks: Json
           slug: string
           status: Database["public"]["Enums"]["opportunity_status"]
           steps: Json
           summary: string
           time_minutes: number
+          time_to_complete: number
           title: string
           updated_at: string
+          verification: Json | null
         }
         Insert: {
           brand: string
+          brand_logo?: string | null
+          capital_required?: Json
           category: Database["public"]["Enums"]["opportunity_category"]
           created_at?: string
           difficulty: string
+          effort?: string
+          eligibility?: Json
           expires_at?: string | null
           external_url?: string | null
+          has_commission?: boolean
           id?: string
           is_featured?: boolean
           is_new?: boolean
+          payout?: Json
           previous_reward?: number | null
+          reward?: Json
           reward_max: number
           reward_min?: number
+          risks?: Json
           slug: string
           status?: Database["public"]["Enums"]["opportunity_status"]
           steps?: Json
           summary: string
           time_minutes: number
+          time_to_complete?: number
           title: string
           updated_at?: string
+          verification?: Json | null
         }
         Update: {
           brand?: string
+          brand_logo?: string | null
+          capital_required?: Json
           category?: Database["public"]["Enums"]["opportunity_category"]
           created_at?: string
           difficulty?: string
+          effort?: string
+          eligibility?: Json
           expires_at?: string | null
           external_url?: string | null
+          has_commission?: boolean
           id?: string
           is_featured?: boolean
           is_new?: boolean
+          payout?: Json
           previous_reward?: number | null
+          reward?: Json
           reward_max?: number
           reward_min?: number
+          risks?: Json
           slug?: string
           status?: Database["public"]["Enums"]["opportunity_status"]
           steps?: Json
           summary?: string
           time_minutes?: number
+          time_to_complete?: number
           title?: string
           updated_at?: string
+          verification?: Json | null
         }
         Relationships: []
       }
