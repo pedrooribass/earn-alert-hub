@@ -2,9 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BellRing } from "lucide-react";
 import { AppShell } from "@/components/beer-money/app-shell";
 import { Button } from "@/components/ui/button";
-import { capitalLabel, offerPresentation, opportunities, payoutLabel, rewardLabel, totalAvailable } from "@/lib/opportunities";
 import { BrandLogo } from "@/components/beer-money/brand-logo";
+import { byDocumentedValue, capitalFreeTotal, capitalLabel, opportunities, payoutLabel, requiresDeposit, rewardLabel, totalAvailable, verifiedCount, type Offer } from "@/lib/opportunities";
+import { offerContent } from "@/lib/offer-content";
 import { useOpportunityProgress } from "@/lib/opportunity-progress";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -17,32 +19,81 @@ export const Route = createFileRoute("/")({
   ]}), component: TodayPage,
 });
 
-function TodayPage() {
-  const { progress } = useOpportunityProgress();
-  const ranked = [...opportunities].sort((a, b) => (b.reward.max ?? b.reward.min) - (a.reward.max ?? a.reward.min));
-  const completed = ranked.filter((item) => progress[item.id] === "completed");
-  const claimed = completed.reduce((sum, item) => sum + item.reward.min, 0);
-  const available = totalAvailable - claimed;
-  const remaining = ranked.filter((item) => progress[item.id] !== "completed").length;
-  const percent = totalAvailable > 0 ? Math.round((claimed / totalAvailable) * 100) : 0;
-  const featured = ranked.filter((item) => item.verification !== null && item.capitalRequired.kind !== "unknown").slice(0, 2);
-  const rest = ranked.filter((item) => !featured.some((pick) => pick.id === item.id));
+/** Os três grupos dizem o que a oferta custa antes de a pessoa tocar nela. */
+function groupOf(offer: Offer) {
+  if (offer.capitalRequired.kind === "unknown") return "unknown";
+  return requiresDeposit(offer) ? "deposit" : "free";
+}
 
-  return <AppShell action={<Button asChild variant="ghost" size="icon" aria-label="Abrir alertas"><Link to="/alertas"><BellRing /></Link></Button>}>
-    <section className="px-5 pb-7 pt-1 motion-rise">
-      <div className="value-progress" role="progressbar" aria-label={`${claimed} euros concluídos de ${totalAvailable} euros`} aria-valuemin={0} aria-valuemax={totalAvailable} aria-valuenow={claimed}>
-        <div className="value-progress-heading">
-          <div><span>Mínimo documentado disponível</span><strong>{available}€</strong></div>
-          <span className="value-progress-percent">{percent}% concluído</span>
+function costTone(offer: Offer) {
+  if (offer.capitalRequired.kind === "unknown") return "offer-cost offer-cost-soon";
+  return requiresDeposit(offer) ? "offer-cost offer-cost-known" : "offer-cost offer-cost-free";
+}
+
+function TodayPage() {
+  const { locale, t, plural } = useT();
+  const { entryFor } = useOpportunityProgress();
+
+  const ranked = [...opportunities].sort(byDocumentedValue);
+  const gatedTotal = Math.max(totalAvailable - capitalFreeTotal, 0);
+  const freeShare = totalAvailable > 0 ? Math.round((capitalFreeTotal / totalAvailable) * 100) : 0;
+  const anyUnknown = opportunities.some((offer) => offer.capitalRequired.kind === "unknown");
+
+  const groups = (["free", "deposit", "unknown"] as const)
+    .map((key) => ({ key, items: ranked.filter((offer) => groupOf(offer) === key) }))
+    .filter((group) => group.items.length > 0);
+
+  const greetingKey = (() => {
+    const hour = new Date().getHours();
+    if (hour < 13) return "greeting.morning";
+    return hour < 20 ? "greeting.afternoon" : "greeting.evening";
+  })();
+
+  return <AppShell greeting={t(greetingKey)} tagline={t("greeting.tagline")} action={<Button asChild variant="ghost" size="icon" aria-label={t("detail.alerts")}><Link to="/alertas"><BellRing /></Link></Button>}>
+    <section className="px-4 pb-2">
+      <div className="hero-panel">
+        <p className="hero-eyebrow">{t("home.eyebrow", { count: opportunities.length })}</p>
+        <p className="hero-figure"><strong>{totalAvailable}<i>€</i></strong><em>{t("home.pending")}</em></p>
+        <div className="hero-meter" role="img" aria-label={`${capitalFreeTotal}€ / ${gatedTotal}€`}>
+          <i className="free" style={{ flex: `0 0 ${freeShare}%` }} />
+          <i className="gated" style={{ flex: "1 1 auto" }} />
         </div>
-        <p className="value-progress-count">{remaining} ofertas por concluir</p>
-        <div className="value-progress-track"><div className="value-progress-fill" style={{ width: `${percent}%` }} /></div>
-        <div className="value-progress-footer"><span>{claimed}€ concluídos</span><span>{available}€ mínimos disponíveis</span></div>
+        <div className="hero-split">
+          <div className="free"><b>{capitalFreeTotal}<i>€</i></b><p>{t("home.free")}</p></div>
+          <div className="gated"><b>{gatedTotal}<i>€</i></b><p>{anyUnknown ? t("home.gatedMixed") : t("home.gated")}</p></div>
+        </div>
+        <div className="hero-foot">
+          <p>{verifiedCount === 0 ? t("home.verifiedNone") : t("home.verifiedSome", { count: verifiedCount, total: opportunities.length })}</p>
+          <Link to="/como-ganhamos-dinheiro">{t("home.howWeVerify")}</Link>
+        </div>
       </div>
-      <p className="social-proof">[PREENCHER: contador de ofertas verificadas]</p>
-      <h1 className="sr-only">Recompensas mínimas documentadas</h1>
     </section>
-    {featured.length > 0 && <section className="pb-7"><div className="section-heading section-heading-stacked"><h2 className="text-xl font-bold leading-tight">Ofertas recomendadas</h2><Link to="/explorar" className="text-xs font-semibold text-primary">Consultar todas as ofertas</Link></div><div className="featured-grid px-5">{featured.map((item) => { const content = offerPresentation[item.id]; if (!content) return null; return <Link key={item.id} to="/oportunidades/$id" params={{ id: item.id }} className="featured-opportunity"><div className="flex items-start justify-between gap-3"><div><p className="featured-kicker text-left">Recompensa</p><p className="featured-reward">{rewardLabel(item)}</p></div><BrandLogo name={item.brand} large/></div><div className="mt-3"><h3 className="text-[15px] font-semibold">{item.brand}</h3><p className="trust-label">Verificada {item.verification?.verifiedAt}</p></div><p className="mt-1 text-xs text-muted-foreground">{content.title}</p><dl className="offer-terms offer-terms-compact"><div><dt>Custa-te</dt><dd>{capitalLabel(item.capitalRequired)}</dd></div><div><dt>Pagamento</dt><dd>{payoutLabel(item)}</dd></div><div><dt>Trabalho ativo</dt><dd>{item.timeToComplete} min</dd></div></dl><span className="featured-action">{content.actionLabel}</span></Link>})}</div></section>}
-    <section className="px-5 pb-8"><div className="section-heading px-0"><h2 className="text-xl font-bold leading-tight">Todas as ofertas</h2><Link to="/explorar" className="text-xs font-semibold text-primary">Consultar</Link></div><div className="opportunity-list">{rest.map((item) => <Link key={item.id} to="/oportunidades/$id" params={{ id: item.id }} className="opportunity-list-row"><div className="reward-column"><strong>{rewardLabel(item)}</strong><span>Recompensa</span></div><div className="min-w-0 flex flex-1 items-center gap-2.5"><BrandLogo name={item.brand}/><div className="min-w-0"><h3 className="truncate text-sm font-semibold">{item.brand}</h3><p className={`mt-0.5 text-[11px] ${item.capitalRequired.kind === "unknown" ? "text-caution" : "text-muted-foreground"}`}>Custa-te {capitalLabel(item.capitalRequired)}</p><p className="text-[11px] text-muted-foreground">Pagamento {payoutLabel(item)}</p></div></div></Link>)}</div></section>
+
+    {groups.map((group) => <section key={group.key} className="px-4 pt-5">
+      <div className="group-head"><h2>{t(`group.${group.key}`)}</h2><span>{plural(group.items.length)}</span></div>
+      <div className="opportunity-list px-0">
+        {group.items.map((offer) => {
+          const content = offerContent(locale, offer.id);
+          if (!content) return null;
+          const entry = entryFor(offer.id, offer.stepCount);
+          const percent = offer.stepCount > 0 ? Math.round((entry.steps.length / offer.stepCount) * 100) : 0;
+          const reward = rewardLabel(offer, locale);
+          return <Link key={offer.id} to="/oportunidades/$id" params={{ id: offer.id }} className="offer-row">
+            <BrandLogo name={offer.brand} />
+            <span className="offer-name">
+              <h3>{offer.brand}</h3>
+              <span className={costTone(offer)}>{capitalLabel(offer.capitalRequired, locale)}</span>
+              <p className="offer-pay">{percent > 0 ? t("offer.percentDone", { percent }) : payoutLabel(offer, locale)}</p>
+            </span>
+            {reward === t("offer.valuePending")
+              ? <span className="offer-amount offer-amount-soft">{reward}</span>
+              : <span className="offer-amount">{reward.replace("€", "")}<i>€</i></span>}
+            {percent > 0 && <span className="offer-row-progress"><i style={{ width: `${percent}%` }} /></span>}
+          </Link>;
+        })}
+      </div>
+    </section>)}
+
+    <h1 className="sr-only">{t("home.title")}</h1>
   </AppShell>;
 }
