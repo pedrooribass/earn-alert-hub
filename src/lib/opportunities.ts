@@ -56,9 +56,9 @@ export const offers: Offer[] = [
     availableInPortugal: true, verification: null, hasCommission: false, status: "nova",
   },
   {
-    id: "bybit-recompensa", brand: "Bybit", brandLogo: "bybit", category: "deposito",
-    reward: { min: 25, max: 55 }, capitalRequired: { kind: "amount", amount: 100, refundable: true },
-    payout: { estimateDays: 3 }, effort: "medio", timeToComplete: 15, stepCount: 6,
+    id: "trading212-acao", brand: "Trading 212", brandLogo: "trading212", category: "deposito",
+    reward: { min: 8, max: 100 }, capitalRequired: { kind: "amount", amount: 10, refundable: true },
+    payout: { estimateDays: null }, effort: "facil", timeToComplete: 10, stepCount: 4,
     availableInPortugal: true, verification: null, hasCommission: true, status: "nova",
   },
   {
