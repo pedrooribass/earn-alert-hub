@@ -1,9 +1,12 @@
+import { useT } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import type { Offer } from "@/lib/opportunities";
 
 export function VerificationStatus({ verification }: { verification: Offer["verification"] }) {
-  if (!verification) return <p className="trust-label trust-label-unverified">Ainda não verificámos</p>;
+  const { t } = useT();
+
+  if (!verification) return <p className="trust-label trust-label-unverified">{t("trust.unverified")}</p>;
 
   return <Popover>
     <PopoverTrigger asChild>
