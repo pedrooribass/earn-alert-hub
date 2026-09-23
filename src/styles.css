@@ -389,3 +389,8 @@ button[class*="w-full"] { font-weight: 700; }
 .language-switch div { display: flex; gap: 3px; padding: 3px; border-radius: 10px; background: var(--secondary); }
 .language-switch button { border: 0; border-radius: 8px; background: transparent; padding: 8px 14px; color: var(--muted-foreground); font-family: inherit; font-size: 12.5px; font-weight: 700; }
 .language-switch button[aria-pressed="true"] { background: var(--card); color: var(--foreground); box-shadow: var(--surface-shadow); }
+
+.support-card { display: flex; align-items: center; gap: 13px; margin-top: 12px; border: 1px solid color-mix(in oklab, var(--positive) 26%, var(--surface-border)); border-radius: 18px; background: color-mix(in oklab, var(--positive) 7%, var(--card)); padding: 15px 16px; box-shadow: var(--surface-shadow); }
+.support-card svg { width: 21px; height: 21px; flex: none; color: var(--positive); }
+.support-card strong { display: block; font-size: 14px; font-weight: 750; }
+.support-card span span { display: block; margin-top: 2px; color: var(--muted-foreground); font-size: 11.5px; font-weight: 500; }

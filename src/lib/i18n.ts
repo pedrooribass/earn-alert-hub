@@ -1,6 +1,9 @@
 import { useSyncExternalStore } from "react";
 
 export type Locale = "pt" | "de";
+
+/** Apoio 1:1, igual em todas as ofertas e em qualquer idioma. */
+export const supportChannel = { url: "https://wa.me/message/UELHKHECUPWJD1" };
 export const locales: Locale[] = ["pt", "de"];
 export const localeNames: Record<Locale, string> = { pt: "Português", de: "Deutsch" };
 
@@ -111,7 +114,8 @@ const pt: Dict = {
   "detail.promoCode": "Código de registo",
   "detail.copy": "Copiar",
   "detail.copied": "Copiado",
-  "detail.supportSub": "Apoio direto para esta oferta",
+  "detail.support": "Falar connosco no WhatsApp",
+  "detail.supportSub": "Apoio 24 horas por dia, todos os dias",
   "detail.stillVerifying": "Ainda a verificar",
   "detail.howWeEarn": "Como ganhamos dinheiro",
 
@@ -224,7 +228,8 @@ const de: Dict = {
   "detail.promoCode": "Registrierungscode",
   "detail.copy": "Kopieren",
   "detail.copied": "Kopiert",
-  "detail.supportSub": "Direkte Hilfe zu diesem Angebot",
+  "detail.support": "Schreib uns auf WhatsApp",
+  "detail.supportSub": "Rund um die Uhr erreichbar, jeden Tag",
   "detail.stillVerifying": "Wird noch geprüft",
   "detail.howWeEarn": "Womit wir Geld verdienen",
 

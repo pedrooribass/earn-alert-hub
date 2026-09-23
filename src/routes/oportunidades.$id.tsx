@@ -7,7 +7,7 @@ import { offerContent, offerLinks } from "@/lib/offer-content";
 import { BrandLogo } from "@/components/beer-money/brand-logo";
 import { VerificationStatus } from "@/components/beer-money/verification-status";
 import { progressLabels, statusOf, useOpportunityProgress } from "@/lib/opportunity-progress";
-import { useT } from "@/lib/i18n";
+import { supportChannel, useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/oportunidades/$id")({
   loader: ({ params }) => { const item = opportunities.find((offer) => offer.id === params.id); if (!item) throw notFound(); return item; },
@@ -86,6 +86,11 @@ function DetailPage() {
           {entry.steps.length > 0 && <Button variant="ghost" className="mt-3 h-9 w-full text-xs text-muted-foreground" onClick={() => resetOffer(item.id)}><RotateCcw />{t("progress.restart")}</Button>}
         </div>
         <p className="mt-2 px-1 text-[11px] leading-5 text-muted-foreground">{t("progress.disclaimer")}</p>
+
+        <a className="support-card" href={supportChannel.url} target="_blank" rel="noreferrer" onClick={() => navigator.vibrate?.(8)}>
+          <MessageCircle />
+          <span><strong>{t("detail.support")}</strong><span>{t("detail.supportSub")}</span></span>
+        </a>
       </section>
 
       <section className="px-5 pb-6">
@@ -135,13 +140,6 @@ function DetailPage() {
             {copied ? <Check /> : <Copy />}{copied ? t("detail.copied") : t("detail.copy")}
           </Button>
         </div>
-      </section>}
-
-      {links.supportUrl && content.supportLabel && <section className="px-5 pb-6">
-        <a className="flex items-center gap-3 rounded-[18px] border border-border p-4" href={links.supportUrl} target="_blank" rel="noreferrer">
-          <MessageCircle className="size-5 flex-none text-primary" />
-          <span><span className="block text-sm font-bold">{content.supportLabel}</span><span className="block text-xs text-muted-foreground">{t("detail.supportSub")}</span></span>
-        </a>
       </section>}
 
       <section className="px-5 pb-6 pt-2">
