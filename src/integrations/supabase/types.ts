@@ -31,7 +31,6 @@ export type Database = {
           id: string
           is_featured: boolean
           is_new: boolean
-          offer_status: string
           payout: Json
           previous_reward: number | null
           reward: Json
@@ -64,7 +63,6 @@ export type Database = {
           id?: string
           is_featured?: boolean
           is_new?: boolean
-          offer_status?: string
           payout?: Json
           previous_reward?: number | null
           reward?: Json
@@ -97,7 +95,6 @@ export type Database = {
           id?: string
           is_featured?: boolean
           is_new?: boolean
-          offer_status?: string
           payout?: Json
           previous_reward?: number | null
           reward?: Json
@@ -153,26 +150,41 @@ export type Database = {
         Relationships: []
       }
       saved_opportunities: {
-        Row: {
+                Row: {
+          claimed_at: string | null
           completed_at: string | null
           created_at: string
           id: string
-          opportunity_id: string
+          offer_id: string | null
+          opportunity_id: string | null
+          paid_at: string | null
+          steps: number[]
+          updated_at: string
           user_id: string
         }
         Insert: {
+          claimed_at?: string | null
           completed_at?: string | null
           created_at?: string
           id?: string
-          opportunity_id: string
+          offer_id?: string | null
+          opportunity_id?: string | null
+          paid_at?: string | null
+          steps?: number[]
+          updated_at?: string
           user_id: string
         }
         Update: {
+          claimed_at?: string | null
           completed_at?: string | null
           created_at?: string
           id?: string
-          opportunity_id?: string
-          user_id?: string
+          offer_id?: string | null
+          opportunity_id?: string | null
+          paid_at?: string | null
+          steps?: number[]
+          updated_at?: string
+                    user_id?: string
         }
         Relationships: [
           {
