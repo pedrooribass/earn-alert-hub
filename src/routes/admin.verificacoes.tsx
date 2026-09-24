@@ -1,10 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { isAdmin } from "@/lib/admin-guard";
 import { AppShell } from "@/components/beer-money/app-shell";
 import { BrandLogo } from "@/components/beer-money/brand-logo";
 import { auditCatalogue, referralState } from "@/lib/offer-audit";
 import { offerLinks } from "@/lib/offer-content";
 
 export const Route = createFileRoute("/admin/verificacoes")({
+  /* Quem não é administrador recebe 404: uma página de erro confirmaria que a rota existe. */
+  beforeLoad: async () => { if (!(await isAdmin())) throw notFound(); },
   head: () => ({ meta: [
     { title: "Auditoria do catálogo — Beer Money App" },
     { name: "description", content: "Vista interna do que falta em cada oferta antes de ser publicada." },

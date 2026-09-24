@@ -1,11 +1,86 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { BellRing, MoreVertical, Share, SquarePlus } from "lucide-react";
+import { MoreVertical, Share, SquarePlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Brand } from "@/components/beer-money/brand";
 import { Button } from "@/components/ui/button";
-import type { LucideIcon } from "lucide-react";
+import { useT } from "@/lib/i18n";
+import { isStandalone as inApp, markSeen } from "@/lib/entry-flow";
 
-declare global { interface WindowEventMap { beforeinstallprompt: Event; } }
-type InstallPromptEvent = Event & { prompt:()=>Promise<void>; userChoice:Promise<{outcome:"accepted"|"dismissed"}> };
-export const Route = createFileRoute("/instalar")({ head: () => ({ meta: [{ title: "Instalar — Beer Money App" },{ name: "description", content: "Adiciona a Beer Money App ao ecrã principal em três passos." },{ property: "og:title", content: "Instalar Beer Money App" },{ property: "og:description", content: "Acesso num toque e alertas como numa aplicação normal." },{ property: "og:type", content: "website" },{ name: "twitter:card", content: "summary_large_image" }] }), component: InstallPage });
- function InstallPage(){const [prompt,setPrompt]=useState<InstallPromptEvent|null>(null);const navigate=useNavigate();const steps:{icon:LucideIcon;title:string;text:string}[]=[{icon:Share,title:"Toca em Partilhar",text:"Na barra do navegador"},{icon:SquarePlus,title:"Adicionar ao Ecrã Principal",text:"Escolhe esta opção no menu"},{icon:MoreVertical,title:"Confirma em Adicionar",text:"O ícone fica pronto a usar"}];useEffect(()=>{const handler=(event:Event)=>{event.preventDefault();setPrompt(event as InstallPromptEvent)};window.addEventListener("beforeinstallprompt",handler);return()=>window.removeEventListener("beforeinstallprompt",handler)},[]);async function install(){if(prompt){await prompt.prompt();await prompt.userChoice}navigate({to:"/"})}return <main className="mx-auto flex min-h-svh max-w-[540px] flex-col bg-background px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-6"><Brand/><div className="flex flex-1 flex-col justify-center py-8"><div className="install-symbol"><BellRing className="size-12" strokeWidth={1.5}/></div><div className="text-center"><p className="page-context">Instalação</p><h1 className="mt-2 text-[38px] font-extrabold leading-none">Adiciona ao ecrã principal.</h1><p className="mx-auto mt-4 max-w-sm leading-6 text-muted-foreground">Abre num toque e consulta alterações verificadas.</p></div><ol className="mt-9 space-y-3">{steps.map(({icon:Icon,title,text},i)=><li key={title} className="install-step"><span className="step-number">{i+1}</span><div className="flex-1"><p className="text-sm font-extrabold">{title}</p><p className="mt-0.5 text-xs text-muted-foreground">{text}</p></div><Icon className="size-5"/></li>)}</ol></div><div className="space-y-2"><Button size="lg" className="h-13 w-full text-base" onClick={install}>{prompt?"Adicionar ao ecrã principal":"Abrir a lista de ofertas"}</Button><Button variant="ghost" className="w-full text-muted-foreground" onClick={()=>navigate({to:"/"})}>Agora não</Button></div></main>}
+declare global { interface WindowEventMap { beforeinstallprompt: Event } }
+type InstallPromptEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: "accepted" | "dismissed" }> };
+
+export const Route = createFileRoute("/instalar")({
+  head: () => ({ meta: [
+    { title: "Instalar — Beer Money App" },
+    { name: "description", content: "Adiciona a Beer Money App ao ecrã principal." },
+    { property: "og:title", content: "Instalar Beer Money App" },
+    { property: "og:description", content: "Acesso num toque, como qualquer aplicação." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ]}),
+  component: InstallPage,
+});
+
+/** As instruções mudam com o sistema: dizer "toca em Partilhar" a um Android é mandá-lo procurar um botão que não existe. */
+function detectPlatform(): "ios" | "android" {
+  if (typeof navigator === "undefined") return "ios";
+  return /android/i.test(navigator.userAgent) ? "android" : "ios";
+}
+
+function InstallPage() {
+  const [prompt, setPrompt] = useState<InstallPromptEvent | null>(null);
+  const [platform, setPlatform] = useState<"ios" | "android">("ios");
+  const [installed, setInstalled] = useState(false);
+  const navigate = useNavigate();
+  const { t } = useT();
+
+  useEffect(() => {
+    setPlatform(detectPlatform());
+    setInstalled(inApp());
+    const handler = (event: Event) => { event.preventDefault(); setPrompt(event as InstallPromptEvent); };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  function leave() {
+    markSeen("installSeen");
+    navigate({ to: "/login", replace: true });
+  }
+
+  async function install() {
+    if (prompt) { await prompt.prompt(); await prompt.userChoice; }
+    leave();
+  }
+
+  const icons = [platform === "ios" ? Share : MoreVertical, SquarePlus, SquarePlus];
+
+  return <main className="entry-screen">
+    <Brand />
+    <div className="entry-body">
+      <p className="page-context">{t("install.eyebrow")}</p>
+      <h1 className="entry-title">{t("install.title")}</h1>
+      <p className="entry-text">{installed ? t("install.installed") : t("install.body")}</p>
+
+      {!installed && !prompt && <ol className="mt-8 space-y-2.5">
+        {[1, 2, 3].map((n, index) => {
+          const Icon = icons[index] ?? SquarePlus;
+          return <li key={n} className="install-step">
+            <span className="step-number">{n}</span>
+            <div className="flex-1">
+              <p className="text-sm font-bold">{t(`install.${platform}.${n}.title`)}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{t(`install.${platform}.${n}.text`)}</p>
+            </div>
+            <Icon className="size-5 text-muted-foreground" />
+          </li>;
+        })}
+      </ol>}
+    </div>
+
+    <div className="space-y-2">
+      <Button size="lg" className="h-13 w-full text-base" onClick={install}>
+        {prompt && !installed ? t("install.cta") : t("install.open")}
+      </Button>
+      {!installed && <Button variant="ghost" className="w-full text-muted-foreground" onClick={leave}>{t("install.later")}</Button>}
+    </div>
+  </main>;
+}

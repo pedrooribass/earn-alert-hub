@@ -1,26 +1,33 @@
 import { useEffect, useState } from "react";
 import mark from "@/assets/bmc-mark.png.asset.json";
+import { useT } from "@/lib/i18n";
 
+/**
+ * Só aparece uma vez por sessão e sai sozinho. Mantém-se curto de propósito:
+ * um ecrã de arranque longo é tempo roubado a quem já sabe o que vem a seguir.
+ */
 export function SplashScreen() {
-  const [visible, setVisible] = useState(false);
+  const [phase, setPhase] = useState<"hidden" | "in" | "out">("hidden");
+  const { t } = useT();
 
   useEffect(() => {
     if (sessionStorage.getItem("bmc-splash-seen")) return;
-    setVisible(true);
-    const timer = window.setTimeout(() => {
-      setVisible(false);
+    setPhase("in");
+    const fade = window.setTimeout(() => setPhase("out"), 1100);
+    const done = window.setTimeout(() => {
+      setPhase("hidden");
       sessionStorage.setItem("bmc-splash-seen", "1");
-    }, 1900);
-    return () => window.clearTimeout(timer);
+    }, 1500);
+    return () => { window.clearTimeout(fade); window.clearTimeout(done); };
   }, []);
 
-  if (!visible) return null;
+  if (phase === "hidden") return null;
   return (
-    <div className="splash-screen" aria-label="Beer Money App">
+    <div className="splash-screen" data-phase={phase} role="status" aria-label="Beer Money">
       <div className="splash-mark"><img src={mark.url} alt="" /></div>
-      <p className="splash-name">Beer Money App</p>
-      <p className="splash-slogan">Bónus de registo, verificados.</p>
-      <p className="splash-description">Comparamos recompensa, capital exigido e prazo de pagamento.</p>
+      <p className="splash-name">Beer Money</p>
+      <p className="splash-slogan">{t("splash.slogan")}</p>
+      <p className="splash-description">{t("splash.description")}</p>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { BottomNav } from "./bottom-nav";
 import { SplashScreen } from "./splash-screen";
 import { supabase } from "@/integrations/supabase/client";
 import { useT } from "@/lib/i18n";
+import { useEntryFlow } from "@/lib/entry-flow";
 
 /** Primeiro nome de quem iniciou sessão, para a app falar com a pessoa pelo nome. */
 function useFirstName() {
@@ -22,10 +23,13 @@ function useFirstName() {
   return name;
 }
 
-export function AppShell({ children, title, eyebrow, greeting, tagline, action }: { children: ReactNode; title?: string; eyebrow?: string; greeting?: string; tagline?: string; action?: ReactNode }) {
+export function AppShell({ children, title, eyebrow, greeting, tagline, action, gate = true }: { children: ReactNode; title?: string; eyebrow?: string; greeting?: string; tagline?: string; action?: ReactNode; gate?: boolean }) {
+  const flow = useEntryFlow(gate);
   const name = useFirstName();
   const { t, locale } = useT();
   useEffect(() => { document.documentElement.lang = locale === "de" ? "de-DE" : "pt-PT"; }, [locale]);
+
+  if (gate && flow === "checking") return null;
 
   return <div className="app-frame">
     <SplashScreen />

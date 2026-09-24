@@ -1,15 +1,77 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { BellRing, Clock3, Sparkles } from "lucide-react";
-import { useEffect, useState } from "react";
+import { CheckCircle2, MessageCircle, ShieldCheck, WalletCards } from "lucide-react";
+import { useState, type ReactNode } from "react";
 import { Brand } from "@/components/beer-money/brand";
 import { Button } from "@/components/ui/button";
-import { opportunities } from "@/lib/opportunities";
+import { capitalFreeTotal, opportunities, totalAvailable } from "@/lib/opportunities";
+import { useT } from "@/lib/i18n";
+import { Money } from "@/lib/money";
+import { markSeen } from "@/lib/entry-flow";
 
-export const Route = createFileRoute("/onboarding")({ head: () => ({ meta: [{ title: "Bónus verificados — Beer Money App" },{ name: "description", content: "Recompensa, capital exigido e prazo de pagamento num só registo." },{ property: "og:title", content: "Bónus de registo verificados" },{ property: "og:description", content: "Consulta condições verificadas antes de abrir uma conta." },{ property: "og:type", content: "website" },{ name: "twitter:card", content: "summary_large_image" }] }), component: OnboardingPage });
-const pages=[
- {title:"Bónus verificados.",text:"Comparamos recompensa, capital exigido e prazo de pagamento.",visual:<div className="onboarding-symbol"><Sparkles className="size-16" strokeWidth={1.4}/></div>},
-  {title:"Condições antes da decisão.",text:"Cada oferta apresenta os requisitos disponíveis sem promessas vagas.",visual:<div className="w-full max-w-[300px] rounded-lg border bg-card p-5"><div className="flex items-center justify-between"><strong>Recompensa</strong><strong className="text-2xl">[PREENCHER]</strong></div><div className="mt-5 flex items-center gap-2 text-sm text-caution"><Clock3 className="size-4"/> Prazo: [PREENCHER]</div></div>},
-  {title:"Alterações relevantes.",text:"Recebe um alerta quando uma condição verificada mudar.",visual:<div className="w-full max-w-[320px] rounded-xl border bg-card p-4"><div className="flex gap-3"><span className="notification-icon"><BellRing className="size-5"/></span><div><p className="text-xs text-muted-foreground">Beer Money App</p><p className="mt-1 font-extrabold">Condições da Bybit atualizadas</p></div></div></div>},
-  {title:"Tudo num só registo.",text:"Consulta as ofertas e confirma as condições na plataforma antes de abrir conta.",visual:<div className="text-center"><p className="big-number motion-count">{opportunities.length}</p><p className="mt-4 text-sm font-bold text-muted-foreground">ofertas registadas</p></div>}
-];
-function OnboardingPage(){const [step,setStep]=useState(0);const navigate=useNavigate();useEffect(()=>{localStorage.setItem("bmc-seen-onboarding","1")},[]);const p=pages[step];if(!p)return null;return <main className="mx-auto flex min-h-svh max-w-[540px] flex-col bg-background px-6 pb-[max(24px,env(safe-area-inset-bottom))] pt-6"><Brand/><div className="flex flex-1 flex-col items-center justify-center py-8"><div key={step} className="motion-rise flex min-h-[250px] w-full items-center justify-center">{p.visual}</div><div key={`copy-${step}`} className="motion-rise mt-8 text-center"><h1 className="font-editorial text-[38px] font-semibold leading-[1.02]">{p.title}</h1><p className="mx-auto mt-4 max-w-sm text-[16px] leading-6 text-muted-foreground">{p.text}</p></div></div><div><div className="mb-5 flex justify-center gap-2">{pages.map((_,i)=><span key={i} className={i===step?"h-1.5 w-7 rounded-full bg-primary":"size-1.5 rounded-full bg-border"}/>)}</div><Button size="lg" className="h-13 w-full text-base" onClick={()=>step===pages.length-1?navigate({to:"/login"}):setStep(step+1)}>{step===pages.length-1?"Entrar na conta":"Ver informação seguinte"}</Button></div></main>}
+export const Route = createFileRoute("/onboarding")({
+  head: () => ({ meta: [
+    { title: "Bem-vindo — Beer Money App" },
+    { name: "description", content: "Recompensa, capital exigido e prazo de pagamento, antes de abrires conta." },
+    { property: "og:title", content: "Beer Money App" },
+    { property: "og:description", content: "Consulta as condições antes de abrir uma conta." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ]}),
+  component: OnboardingPage,
+});
+
+function OnboardingPage() {
+  const [step, setStep] = useState(0);
+  const navigate = useNavigate();
+  const { locale, t } = useT();
+
+  /** Os exemplos usam os números reais do catálogo, não valores de fachada. */
+  const visuals: ReactNode[] = [
+    <div key="a" className="onboard-figure">
+      <p>{t("onboarding.offersCount")}</p>
+      <strong><Money locale={locale} min={totalAvailable} size="display" /></strong>
+      <span>{t("home.eyebrow", { count: opportunities.length })}</span>
+    </div>,
+    <div key="b" className="onboard-card">
+      <div className="onboard-split">
+        <div><b><Money locale={locale} min={capitalFreeTotal} size="value" /></b><p>{t("home.free")}</p></div>
+        <div><b><Money locale={locale} min={Math.max(totalAvailable - capitalFreeTotal, 0)} size="value" /></b><p>{t("home.gated")}</p></div>
+      </div>
+      <div className="onboard-meter"><i className="free" style={{ flex: `0 0 ${Math.round((capitalFreeTotal / Math.max(totalAvailable, 1)) * 100)}%` }} /><i className="gated" /></div>
+    </div>,
+    <div key="c" className="onboard-card onboard-steps">
+      <p className="onboard-done"><CheckCircle2 />Criar conta</p>
+      <p className="onboard-done"><CheckCircle2 />Depositar</p>
+      <p><span className="onboard-todo" />Receber a recompensa</p>
+      <div className="onboard-progress"><i style={{ width: "66%" }} /></div>
+    </div>,
+    <div key="d" className="onboard-support"><MessageCircle /><span>WhatsApp</span></div>,
+  ];
+
+  const icons = [ShieldCheck, WalletCards, CheckCircle2, MessageCircle];
+  const last = step === 3;
+  const Icon = icons[step] ?? ShieldCheck;
+
+  return <main className="onboard">
+    <header className="onboard-top">
+      <Brand />
+      {!last && <Button variant="ghost" className="text-xs text-muted-foreground" onClick={() => { markSeen("onboarded"); navigate({ to: "/instalar" }); }}>{t("onboarding.skip")}</Button>}
+    </header>
+
+    <div className="onboard-body">
+      <div key={step} className="motion-rise onboard-visual">{visuals[step]}</div>
+      <div key={`copy-${step}`} className="motion-rise onboard-copy">
+        <span className="onboard-icon"><Icon strokeWidth={1.8} /></span>
+        <h1>{t(`onboarding.${step + 1}.title`)}</h1>
+        <p>{t(`onboarding.${step + 1}.text`)}</p>
+      </div>
+    </div>
+
+    <div className="onboard-foot">
+      <div className="onboard-dots">{[0, 1, 2, 3].map((i) => <span key={i} data-on={i === step} />)}</div>
+      <Button size="lg" className="h-13 w-full text-base" onClick={() => { if (!last) { setStep(step + 1); return; } markSeen("onboarded"); navigate({ to: "/instalar" }); }}>
+        {last ? t("onboarding.continue") : t("onboarding.next")}
+      </Button>
+    </div>
+  </main>;
+}

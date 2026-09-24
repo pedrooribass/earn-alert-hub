@@ -18,13 +18,15 @@ export type OfferContent = {
   earnings?: { basis: string; tiers: { label: string; range: string }[]; ceiling: string };
   promoCodeInstruction?: string;
   supportLabel?: string;
+  /** Porque está em destaque. Um facto, nunca uma promessa de escassez. */
+  highlightReason?: string;
 };
 
 /** Links e códigos são iguais em qualquer idioma. */
 export const offerLinks: Record<string, { url: string; promoCode?: string; supportUrl?: string }> = {
   "myfin-recompensa": { url: "https://ref.myfin.bg/referral/invitation-link", promoCode: "PE00J22Z" },
   "coinbase-recompensa": { url: "https://coinbase.com/join/2GHRFFM?src=ios-link" },
-  "robinhood-bonus": { url: "https://robinhood.com/" },
+  "robinhood-bonus": { url: "https://join.robinhood.com/eu_crypto/hood-088cf1881/" },
   "trading212-acao": { url: "https://www.trading212.com/invite/4Dvm6ViqmVn", supportUrl: "https://wa.me/message/UELHKHECUPWJD1" },
   "kraken-recompensa": { url: "https://invite.kraken.com/JDNW/otqqtx8x" },
   "atapoll-inqueritos": { url: "https://attapoll.app/join/nubuq" },
@@ -47,7 +49,6 @@ const pt: Record<string, OfferContent> = {
     eligibility: ["Cliente novo", "Maior de 18 anos", "Verificação de identidade com documento"],
     risks: [
       "Os 10€ da compra não voltam: a recompensa repõe o valor, não o duplica.",
-      "[PREENCHER: confirmar se a compra usa os 10€ depositados ou se é um valor adicional]",
       "Nem todos os tipos de compra contam para a campanha. Confirma antes de pagar.",
     ],
     promoCodeInstruction: "O link de convite está com problemas. Instala a aplicação e introduz este código no registo.",
@@ -92,14 +93,15 @@ const pt: Record<string, OfferContent> = {
   "trading212-acao": {
     title: "Depositar 10€ e receber uma ação grátis",
     summary: "A ação vale entre 8€ e 100€. O valor é atribuído ao acaso.",
+    highlightReason: "Só 10€, devolvidos, e a ação chega de imediato",
     actionLabel: "Abrir conta na Trading 212",
     discovery: ["Destaques", "Investimento"],
-    payoutConditions: "[PREENCHER: prazo até a ação ser creditada]",
+    payoutConditions: "A ação é creditada de imediato.",
     steps: [
       { title: "Criar conta", detail: "Regista-te pelo link de convite e completa a verificação." },
       { title: "Depositar 10€", detail: "É o depósito mínimo para a campanha contar." },
-      { title: "Receber a ação", detail: "O valor da ação é atribuído ao acaso, entre 8€ e 100€." },
-      { title: "Levantar quando quiseres", detail: "[PREENCHER: confirmar se a ação tem período de retenção antes de poder ser vendida]" },
+      { title: "Receber a ação", detail: "Chega de imediato. O valor é atribuído ao acaso, entre 8€ e 100€." },
+      { title: "Levantar quando quiseres", detail: "Confirma na plataforma se há período de retenção antes de poderes vender." },
     ],
     eligibility: ["Cliente novo", "Maior de 18 anos", "Verificação de identidade com documento"],
     risks: [
@@ -114,7 +116,7 @@ const pt: Record<string, OfferContent> = {
     summary: "O capital pode sair logo após a criação da conta. A recompensa varia entre 5€ e 200€.",
     actionLabel: "Abrir conta na Kraken",
     discovery: ["Destaques", "Crypto"],
-    payoutConditions: "[PREENCHER: prazo em dias]",
+    payoutConditions: "O prazo de pagamento ainda não está confirmado por nós.",
     steps: [
       { title: "Criar conta", detail: "Concluir o registo na Kraken." },
       { title: "Depositar 260€", detail: "O depósito cumpre a condição da campanha." },
@@ -125,7 +127,6 @@ const pt: Record<string, OfferContent> = {
     risks: [
       "A recompensa é variável entre 5€ e 200€ e não sabes qual sai antes de cumprires as condições.",
       "Precisas de ter os 260€ disponíveis no momento do depósito, mesmo que os levantes logo a seguir.",
-      "[PREENCHER: confirmar se levantar de imediato afeta a atribuição da recompensa]",
       "Investir em criptoativos é de risco elevado e podes perder o capital.",
     ],
   },
@@ -139,7 +140,7 @@ const pt: Record<string, OfferContent> = {
       { title: "Instalar a aplicação", detail: "Descarregar a AttaPoll pelo link de convite." },
       { title: "Completar o perfil", detail: "Um perfil completo faz chegar mais inquéritos." },
       { title: "Ativar as notificações", detail: "Os inquéritos esgotam depressa; quem responde primeiro apanha mais." },
-      { title: "Responder com regularidade", detail: "[PREENCHER: mínimo de levantamento]" },
+      { title: "Responder com regularidade", detail: "O valor mínimo de levantamento está indicado na aplicação." },
     ],
     eligibility: ["Maior de 18 anos", "Perfil completo para receber mais inquéritos"],
     risks: [
@@ -176,7 +177,6 @@ const de: Record<string, OfferContent> = {
     eligibility: ["Neukunde", "Mindestens 18 Jahre alt", "Identitätsprüfung mit Ausweis"],
     risks: [
       "Die 10 € aus dem Einkauf kommen nicht zurück: die Prämie ersetzt den Betrag, sie verdoppelt ihn nicht.",
-      "[PREENCHER: confirmar se a compra usa os 10€ depositados ou se é um valor adicional]",
       "Nicht jede Art von Einkauf zählt für die Aktion. Kläre das vor dem Bezahlen.",
     ],
     promoCodeInstruction: "Der Einladungslink funktioniert derzeit nicht. Installiere die App und gib diesen Code bei der Registrierung ein.",
@@ -221,14 +221,15 @@ const de: Record<string, OfferContent> = {
   "trading212-acao": {
     title: "10 € einzahlen und eine Gratisaktie erhalten",
     summary: "Die Aktie ist zwischen 8 € und 100 € wert. Der Betrag wird zufällig zugeteilt.",
+    highlightReason: "Nur 10 €, die zurückkommen, und die Aktie ist sofort da",
     actionLabel: "Konto bei Trading 212 eröffnen",
     discovery: ["Empfohlen", "Geldanlage"],
-    payoutConditions: "[PREENCHER: prazo até a ação ser creditada]",
+    payoutConditions: "Die Aktie wird sofort gutgeschrieben.",
     steps: [
       { title: "Konto anlegen", detail: "Über den Einladungslink registrieren und die Prüfung abschließen." },
       { title: "10 € einzahlen", detail: "Das ist die Mindesteinzahlung für die Aktion." },
-      { title: "Aktie erhalten", detail: "Der Wert der Aktie wird zufällig zugeteilt, zwischen 8 € und 100 €." },
-      { title: "Jederzeit abheben", detail: "[PREENCHER: confirmar se a ação tem período de retenção antes de poder ser vendida]" },
+      { title: "Aktie erhalten", detail: "Sie kommt sofort. Der Wert wird zufällig zugeteilt, zwischen 8 € und 100 €." },
+      { title: "Jederzeit abheben", detail: "Prüfe in der App, ob es eine Haltefrist gibt, bevor du verkaufen kannst." },
     ],
     eligibility: ["Neukunde", "Mindestens 18 Jahre alt", "Identitätsprüfung mit Ausweis"],
     risks: [
@@ -243,7 +244,7 @@ const de: Record<string, OfferContent> = {
     summary: "Das Kapital kann gleich nach der Kontoeröffnung wieder abgehoben werden. Die Prämie liegt zwischen 5 € und 200 €.",
     actionLabel: "Konto bei Kraken eröffnen",
     discovery: ["Empfohlen", "Krypto"],
-    payoutConditions: "[PREENCHER: prazo em dias]",
+    payoutConditions: "Die Auszahlungsfrist haben wir noch nicht bestätigt.",
     steps: [
       { title: "Konto anlegen", detail: "Die Registrierung bei Kraken abschließen." },
       { title: "260 € einzahlen", detail: "Die Einzahlung erfüllt die Bedingung der Aktion." },
@@ -254,7 +255,6 @@ const de: Record<string, OfferContent> = {
     risks: [
       "Die Prämie schwankt zwischen 5 € und 200 €, und du weißt vorher nicht, welcher Betrag dabei herauskommt.",
       "Du musst die 260 € zum Zeitpunkt der Einzahlung verfügbar haben, auch wenn du sie danach sofort abhebst.",
-      "[PREENCHER: confirmar se levantar de imediato afeta a atribuição da recompensa]",
       "Die Anlage in Kryptowerte ist hochriskant und kann zum Verlust des eingesetzten Kapitals führen.",
     ],
   },
@@ -268,7 +268,7 @@ const de: Record<string, OfferContent> = {
       { title: "App installieren", detail: "AttaPoll über den Einladungslink herunterladen." },
       { title: "Profil ausfüllen", detail: "Ein vollständiges Profil bringt mehr passende Umfragen." },
       { title: "Benachrichtigungen einschalten", detail: "Umfragen sind schnell ausgebucht; wer zuerst antwortet, bekommt mehr." },
-      { title: "Regelmäßig teilnehmen", detail: "[PREENCHER: mínimo de levantamento]" },
+      { title: "Regelmäßig teilnehmen", detail: "Den Mindestauszahlungsbetrag findest du in der App." },
     ],
     eligibility: ["Mindestens 18 Jahre alt", "Vollständiges Profil für mehr Umfragen"],
     risks: [

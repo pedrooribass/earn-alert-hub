@@ -4,6 +4,9 @@ import { BrandLogo } from "@/components/beer-money/brand-logo";
 import { opportunities, rewardLabel } from "@/lib/opportunities";
 import { statusOf, useOpportunityProgress } from "@/lib/opportunity-progress";
 import { useT } from "@/lib/i18n";
+import { Money } from "@/lib/money";
+import { useReveal } from "@/lib/use-reveal";
+import { prefersReducedMotion, setDirection } from "@/lib/page-transition";
 
 export const Route = createFileRoute("/carteira")({
   head: () => ({ meta: [
@@ -20,6 +23,7 @@ const milestones = [25, 50, 100];
 
 function WalletPage() {
   const { locale, t } = useT();
+  useReveal();
   const { entryFor } = useOpportunityProgress();
   const months = locale === "de"
     ? ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
@@ -53,10 +57,10 @@ function WalletPage() {
   const averageDays = payoutDays.length > 0 ? Math.round(payoutDays.reduce((sum, days) => sum + days, 0) / payoutDays.length) : null;
 
   return <AppShell title={t("wallet.title")} eyebrow={t("wallet.eyebrow")}>
-    <section className="px-4 pt-1">
+    <section className="px-4 pt-1" data-reveal>
       <div className="hero-panel">
         <p className="hero-eyebrow">{t("wallet.marked")}</p>
-        <p className="hero-figure reward-pop"><strong>{claimed}<i>€</i></strong><em>{done.length === 1 ? t("wallet.inOffer") : t("wallet.inOffers", { count: done.length })}</em></p>
+        <p className="hero-figure reward-pop"><strong><Money locale={locale} min={claimed} size="display" /></strong><em>{done.length === 1 ? t("wallet.inOffer") : t("wallet.inOffers", { count: done.length })}</em></p>
         <div className="hero-foot">
           <p>{pending === 0
             ? t("wallet.runningNone")
@@ -66,11 +70,11 @@ function WalletPage() {
       </div>
     </section>
 
-    <section className="px-4 pt-4">
+    <section className="px-4 pt-4" data-reveal>
       <div className="stat-grid">
         <div className="stat-card">
           <p>{t("wallet.thisMonth")}</p>
-          <strong>{thisMonth}<i>€</i></strong>
+          <strong><Money locale={locale} min={thisMonth} size="value" /></strong>
           <span>{months[now.getMonth()]} {now.getFullYear()}</span>
         </div>
         <div className="stat-card">
@@ -88,14 +92,14 @@ function WalletPage() {
       </div>
     </section>
 
-    <section className="px-4 pt-6">
+    <section className="px-4 pt-6" data-reveal>
       <div className="group-head"><h2>{t("wallet.milestones")}</h2><span>{t("wallet.markedAmount", { amount: claimed })}</span></div>
       <div className="opportunity-list">
         {milestones.map((target) => {
           const reached = claimed >= target;
           const percent = Math.min(Math.round((claimed / target) * 100), 100);
           return <div key={target} className="milestone">
-            <span className="milestone-badge" data-reached={reached}>{target}€</span>
+            <span className="milestone-badge" data-reached={reached}>{target}</span>
             <div className="min-w-0 flex-1">
               <h3>{t(`wallet.milestone${target}`)}</h3>
               <p>{reached ? t("wallet.reached") : t(`wallet.milestone${target}detail`)}</p>
@@ -106,14 +110,14 @@ function WalletPage() {
       </div>
     </section>
 
-    <section className="px-4 pb-6 pt-6">
+    <section className="px-4 pb-6 pt-6" data-reveal>
       <div className="group-head"><h2>{t("wallet.running")}</h2><span>{running.length}</span></div>
       {running.length === 0
         ? <div className="empty-state"><h3>{t("wallet.emptyTitle")}</h3><p>{t("wallet.emptyBody")}</p></div>
         : <div className="opportunity-list px-0">
             {running.map(({ offer, entry }) => {
               const percent = Math.round((entry.steps.length / offer.stepCount) * 100);
-              return <Link key={offer.id} to="/oportunidades/$id" params={{ id: offer.id }} className="offer-row">
+              return <Link key={offer.id} to="/oportunidades/$id" params={{ id: offer.id }} viewTransition={!prefersReducedMotion()} onClick={() => setDirection("forward")} className="offer-row">
                 <BrandLogo name={offer.brand} />
                 <span className="offer-name">
                   <h3>{offer.brand}</h3>

@@ -97,6 +97,10 @@ export function auditOffer(offer: Offer): AuditIssue[] {
     issues.push({ field: "Aviso de risco", severity: "bloqueante", detail: "Oferta de criptoativos ou de depósito sem aviso de risco escrito." });
   }
 
+  for (const question of offer.openQuestions ?? []) {
+    issues.push({ field: "Por confirmar", severity: "importante", detail: question });
+  }
+
   if (offer.verification === null) {
     issues.push({ field: "Verificação", severity: "menor", detail: "Ninguém percorreu o fluxo do princípio ao fim para confirmar o pagamento." });
   }

@@ -8,6 +8,8 @@ import { BrandLogo } from "@/components/beer-money/brand-logo";
 import { VerificationStatus } from "@/components/beer-money/verification-status";
 import { progressLabels, statusOf, useOpportunityProgress } from "@/lib/opportunity-progress";
 import { supportChannel, useT } from "@/lib/i18n";
+import { prefersReducedMotion, setDirection } from "@/lib/page-transition";
+import { tap } from "@/lib/haptics";
 
 export const Route = createFileRoute("/oportunidades/$id")({
   loader: ({ params }) => { const item = opportunities.find((offer) => offer.id === params.id); if (!item) throw notFound(); return item; },
@@ -46,7 +48,7 @@ function DetailPage() {
 
   return <div className="app-frame">
     <header className="app-header">
-      <Button asChild variant="ghost" size="icon" aria-label={t("detail.back")}><Link to="/"><ArrowLeft /></Link></Button>
+      <Button asChild variant="ghost" size="icon" aria-label={t("detail.back")}><Link to="/" viewTransition={!prefersReducedMotion()} onClick={() => setDirection("back")}><ArrowLeft /></Link></Button>
       <span className="text-sm font-semibold">{t("detail.opportunity")}</span>
       <Button variant="ghost" size="icon" aria-label={t("detail.save")} onClick={() => setSaved(!saved)} className={saved ? "text-primary" : ""}><Bookmark className={saved ? "fill-current" : ""} /></Button>
     </header>
@@ -87,11 +89,24 @@ function DetailPage() {
         </div>
         <p className="mt-2 px-1 text-[11px] leading-5 text-muted-foreground">{t("progress.disclaimer")}</p>
 
-        <a className="support-card" href={supportChannel.url} target="_blank" rel="noreferrer" onClick={() => navigator.vibrate?.(8)}>
+        <a className="support-card" href={supportChannel.url} target="_blank" rel="noreferrer" onClick={(event) => tap(event.currentTarget)}>
           <MessageCircle />
           <span><strong>{t("detail.support")}</strong><span>{t("detail.supportSub")}</span></span>
         </a>
       </section>
+
+      {links.promoCode && <section className="px-5 pb-6">
+        <div className="promo-code">
+          <div>
+            <p>{t("detail.promoCode")}</p>
+            <strong>{links.promoCode}</strong>
+            <span>{content.promoCodeInstruction}</span>
+          </div>
+          <Button variant="secondary" className="h-10 flex-none px-4 text-xs font-bold" onClick={() => { navigator.clipboard?.writeText(links.promoCode!); setCopied(true); window.setTimeout(() => setCopied(false), 1800); tap(null); }}>
+            {copied ? <Check /> : <Copy />}{copied ? t("detail.copied") : t("detail.copy")}
+          </Button>
+        </div>
+      </section>}
 
       <section className="px-5 pb-6">
         <h2 className="text-base font-bold">{t("detail.conditions")}</h2>
@@ -129,19 +144,6 @@ function DetailPage() {
         </div>
       </section>}
 
-      {links.promoCode && <section className="px-5 pb-6">
-        <div className="promo-code">
-          <div>
-            <p>{t("detail.promoCode")}</p>
-            <strong>{links.promoCode}</strong>
-            <span>{content.promoCodeInstruction}</span>
-          </div>
-          <Button variant="secondary" className="h-10 flex-none px-4 text-xs font-bold" onClick={() => { navigator.clipboard?.writeText(links.promoCode!); setCopied(true); window.setTimeout(() => setCopied(false), 1800); navigator.vibrate?.(8); }}>
-            {copied ? <Check /> : <Copy />}{copied ? t("detail.copied") : t("detail.copy")}
-          </Button>
-        </div>
-      </section>}
-
       <section className="px-5 pb-6 pt-2">
         <Button asChild variant="link" className="h-auto p-0 text-xs"><Link to="/como-ganhamos-dinheiro">{t("detail.howWeEarn")}</Link></Button>
       </section>
@@ -151,6 +153,7 @@ function DetailPage() {
       {blocked
         ? <Button disabled size="lg" className="h-12 w-full text-[15px]">{t("detail.stillVerifying")}</Button>
         : <Button asChild size="lg" className="h-12 w-full text-[15px]"><a href={links.url} target="_blank" rel="noreferrer" onClick={() => entry.steps.length === 0 && toggleStep(item.id, 0, item.stepCount)}>{content.actionLabel}</a></Button>}
+      {links.promoCode && <p className="mt-2 text-center text-[11px] leading-4 text-muted-foreground">{t("detail.codeFirst")}</p>}
     </div>
   </div>;
 }
